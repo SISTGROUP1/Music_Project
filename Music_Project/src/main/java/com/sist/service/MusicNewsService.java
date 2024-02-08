@@ -1,5 +1,10 @@
 package com.sist.service;
 
-public interface MusicNewsService {
+import java.util.List;
 
+import com.sist.vo.MusicNewsVO;
+
+public interface MusicNewsService {
+	public List<MusicNewsVO> musicNewsData(int start, int end);
+	public int musicNewsTotalPage();
 }

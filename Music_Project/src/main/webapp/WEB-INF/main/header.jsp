@@ -38,9 +38,9 @@
                                 <a href="../resources/views/404.html" class="dropdown-item">404 Error</a>
                             </div>
                         </div>
-                        <a href="../resources/views/contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="../musicnews/list.do" class="nav-item nav-link">매거진</a>
                     </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Login</a>
                 </div>
             </nav>
         </div>
