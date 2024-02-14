@@ -10,4 +10,10 @@ public class MusicNewsController {
 	{
 		return "musicnews/list";
 	}
+	
+	@GetMapping("musicnews/detail.do")
+	public String musicnews_detail()
+	{
+		return "musicnews/detail";
+	}
 }

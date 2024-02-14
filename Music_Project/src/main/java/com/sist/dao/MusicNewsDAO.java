@@ -12,13 +12,18 @@ public class MusicNewsDAO {
 	@Autowired
 	private MusicNewsMapper mapper;
 	
-	public List<MusicNewsVO> musicNewsData(int start, int end)
+	public List<MusicNewsVO> musicNewsData(int start, int end, int cateno)
 	{
-		return mapper.musicNewsData(start, end);
+		return mapper.musicNewsData(start, end, cateno);
 	}
 	
-	public int musicNewsTotalPage()
+	public int musicNewsTotalPage(int cateno)
 	{
-		return mapper.musicNewsTotalPage();
+		return mapper.musicNewsTotalPage(cateno);
+	}
+	
+	public MusicNewsVO musicNewsDetailData(int no)
+	{
+		return mapper.musicNewsDetailData(no);
 	}
 }

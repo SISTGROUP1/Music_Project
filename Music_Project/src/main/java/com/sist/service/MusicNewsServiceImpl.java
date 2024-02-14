@@ -14,16 +14,27 @@ public class MusicNewsServiceImpl implements MusicNewsService{
 	private MusicNewsDAO dao;
 
 	@Override
-	public List<MusicNewsVO> musicNewsData(int start, int end) {
+	public List<MusicNewsVO> musicNewsData(int start, int end, int cateno) {
 		// TODO Auto-generated method stub
-		return dao.musicNewsData(start, end);
+		return dao.musicNewsData(start, end, cateno);
 	}
 
 	@Override
-	public int musicNewsTotalPage() {
+	public int musicNewsTotalPage(int cateno) {
 		// TODO Auto-generated method stub
-		return dao.musicNewsTotalPage();
+		return dao.musicNewsTotalPage(cateno);
 	}
+
+	@Override
+	public MusicNewsVO musicNewsDetailData(int no) {
+		// TODO Auto-generated method stub
+		return dao.musicNewsDetailData(no);
+	}
+	
+	
+
+
+	
 	
 	
 }
