@@ -23,4 +23,11 @@ public interface MusicNewsMapper {
 			+"FROM musicNews "
 			+"WHERE no=#{no}")
 	public MusicNewsVO musicNewsDetailData(int no);
+	
+	// home 출력용
+	@Select("SELECT no, title, regdate, poster "
+			+"FROM (SELECT no, title, regdate, poster "
+			+"FROM musicNews ORDER BY no ASC) "
+			+"WHERE no<=3")
+	public List<MusicNewsVO> musicNews3();
 }

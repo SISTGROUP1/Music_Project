@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -211,53 +212,25 @@
                 </div>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
+                      
                         <div class="row g-4">
+                        
+                          <c:forEach var="mnvo" items="${ musicNewsList}">
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="../resources/img/property-1.jpg" alt=""></a>
+                                        <a href="../musicnews/detail.do?no=${ mnvo.no}"><img class="img-fluid" src="https:${ mnvo.poster}" alt=""></a>
                                    
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">스페셜</div>
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">${mnvo.regdate }</div>
                                     </div>
                                     <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">2024.02.02</h5>
-                                        <a class="d-block h5 mb-2" href="">나윤선, 12집 앨범 [Elles(엘르)] 발매! 전 트랙 소개 및 라이너 노트 공개</a>
-                                      	
+                                        <h5 class="text-primary mb-3"></h5>
+                                        <a class="d-block h5 mb-2" href="../musicnews/detail.do?no=${ mnvo.no}">${mnvo.title }</a>   	
                                     </div>
-         
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="../resources/img/property-2.jpg" alt=""></a>
-                           
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">OST PICK</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">2024.01.08</h5>
-                                        <a class="d-block h5 mb-2" href="">OST PICK! ＃73 - 신선한 듯 고전적인 듯한 드라마의 색채를 닮은 음악</a>
-                                       
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="property-item rounded overflow-hidden">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" src="../resources/img/property-3.jpg" alt=""></a>
-                                        
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">POP</div>
-                                    </div>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">2024.01.22</h5>
-                                        <a class="d-block h5 mb-2" href="">POP 스튜디오 ＃70 - 이렇게 싱숭생숭해지는 마음을 안고 있지만</a>
-                                       
-                                    </div>
-                                   
-                                </div>
-                            </div>
-
+                         </c:forEach>
+                         
                             <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                                 <a class="btn btn-primary py-3 px-5" href="../musicnews/list.do">매거진 전체보기 &raquo;</a>
                             </div>

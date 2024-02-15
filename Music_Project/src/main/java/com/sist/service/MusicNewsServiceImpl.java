@@ -31,7 +31,11 @@ public class MusicNewsServiceImpl implements MusicNewsService{
 		return dao.musicNewsDetailData(no);
 	}
 	
-	
+	@Override
+	public List<MusicNewsVO> musicNews3() {
+		// TODO Auto-generated method stub
+		return dao.musicNews3();
+	}
 
 
 	

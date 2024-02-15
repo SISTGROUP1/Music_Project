@@ -26,4 +26,9 @@ public class MusicNewsDAO {
 	{
 		return mapper.musicNewsDetailData(no);
 	}
+	
+	public List<MusicNewsVO> musicNews3()
+	{
+		return mapper.musicNews3();
+	}
 }
