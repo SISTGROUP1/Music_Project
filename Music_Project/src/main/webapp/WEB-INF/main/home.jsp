@@ -217,7 +217,7 @@
                         
                           <c:forEach var="mnvo" items="${ musicNewsList}">
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="property-item rounded overflow-hidden">
+                                <div class="property-item rounded overflow-hidden" style="width: 408px;height: 374px">
                                     <div class="position-relative overflow-hidden">
                                         <a href="../musicnews/detail.do?no=${ mnvo.no}"><img class="img-fluid" src="https:${ mnvo.poster}" alt=""></a>
                                    
