@@ -57,6 +57,11 @@ public class MemberDAO {
 		mapper.lastLoginUpdate(userId);
 	}
 	
+	public MemberVO memberSessionData(String userId)
+	{
+		return mapper.memberSessionData(userId);
+	}
+	
 	// 아이디 찾기
 	public String idFindOpen(String userName, String email)
 	{

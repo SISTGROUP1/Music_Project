@@ -18,6 +18,9 @@
 		p:url="#{db['url']}"
 		p:username="#{db['username']}"
 		p:password="#{db['password']}"
+		p:maxActive="#{db['maxActive']}"
+		p:maxIdle="#{db['maxIdle']}"
+		p:maxWait="#{db['maxWait']}"
 	/>
 	<!-- MyBatis로 전송 -->
 	<bean id="ssf"

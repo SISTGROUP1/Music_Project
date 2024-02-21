@@ -35,6 +35,13 @@ public interface MemberMapper {
 			+"WHERE userId=#{userId}")
 	public void lastLoginUpdate(String userId);
 	
+	// session
+	@Select("SELECT mu.userId, userName, gender, birth, email, phone, addr1, addr2, enabled, authority "
+			 +"FROM musicUserInfo mu, musicAuthority ma "
+			 +"WHERE mu.userId=ma.userId "
+			 +"AND mu.userId=#{userId}")
+	public MemberVO memberSessionData(String userId);
+	
 	// 아이디 찾기 (존재유무 확인)
 	@Select("SELECT COUNT(*) FROM musicUserInfo "
 			+"WHERE userName=#{userName} AND email=#{email}")

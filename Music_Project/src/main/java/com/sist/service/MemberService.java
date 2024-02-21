@@ -11,6 +11,7 @@ public interface MemberService {
 	public MemberVO memberLogin(String userId, String userPwd);
 	
 	public void lastLoginUpdate(String userId);
+	public MemberVO memberSessionData(String userId);
 	
 	public String idFindOpen(String userName, String email);
 	public MemberVO pwdChange(String userId, String email, String userPwd);

@@ -26,6 +26,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 	private String defaultUrl;
 	
+	@Autowired
+	private MemberService mService;
+	
 	public void setDefaultUrl(String defaultUrl) {
 		this.defaultUrl = defaultUrl;
 	}
@@ -34,6 +37,24 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		// TODO Auto-generated method stub
+		System.out.println("로그인 성공");
+		HttpSession session=request.getSession();
+		
+		mService.lastLoginUpdate(authentication.getName());
+		
+		MemberVO vo=mService.memberSessionData(authentication.getName());
+		SessionInfo info=new SessionInfo();
+		info.setUserId(vo.getUserId());
+		info.setUserName(vo.getUserName());
+		info.setEmail(vo.getEmail());
+		info.setPhone(vo.getPhone());
+		info.setAddress(vo.getAddr1()+" "+vo.getAddr2());
+		info.setGender(vo.getGender());
+		info.setBirth(vo.getBirth());
+		
+		session.setAttribute("member", info);
+		
+		//resultRedirectStrategy(request, response, authentication);
 		response.sendRedirect("../main/main.do");
 	}
 	

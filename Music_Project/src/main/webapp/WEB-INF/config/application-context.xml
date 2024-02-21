@@ -10,11 +10,13 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
-	<!-- AOP 설정 -->
+	<!-- AOP : 공통모듈 -->
 	<aop:aspectj-autoproxy/>
-	<!-- 사용자 정의 클래스 등록 -->
-	<context:component-scan base-package="com.sist.*"/>
 	<mvc:annotation-driven/>
+	
+	<!-- 사용자정의 클래스 등록 -->
+	<context:component-scan base-package="com.sist.*"/>
+	<mvc:default-servlet-handler/>
 	
 	<!-- tiles 설정 -->
 	<bean id="tilesConfigurer"

@@ -63,7 +63,24 @@ a#notice:hover{
                 	<c:if test="${principal.username!=null }">
                      	<a href="../member/logout.do" class="btn btn-primary px-3 d-none d-lg-flex">Logout</a>
                 	</c:if>
+                	
+                	
                 </div>
+                
+                <c:if test="${principal.username==null }">
+			      	<li></li>
+				</c:if>
+				<c:if test="${principal.username!=null }">
+				    <div class="fl_right">
+				      <ul class="inline">
+				        <li>${sessionScope.member.userName }(
+				        <sec:authorize access="hasRole('ROLE_ADMIN')">관리자</sec:authorize>
+				        <sec:authorize access="hasRole('ROLE_USER')">일반사용자</sec:authorize>
+				        )님 환영합니다.</li>
+				      </ul>
+				    </div>
+			    </c:if>
+				 
             </nav>
         </div>
         <!-- Navbar End -->
