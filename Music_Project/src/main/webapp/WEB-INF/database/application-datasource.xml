@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<!-- properties 파일 읽기 -->
-	<util:properties id="db" location="/WEB-INF/config/db.properties"/>
+	<util:properties id="db" location="/WEB-INF/database/db.properties"/>
 	<!-- 데이터베이스 정보를 모아준다. : BasicDataSource -->
 	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
 		p:driverClassName="#{db['driver']}"

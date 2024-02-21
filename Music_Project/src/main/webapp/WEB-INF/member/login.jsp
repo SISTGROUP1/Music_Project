@@ -5,13 +5,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://unpkg.com/vue@3"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#logBtn').click(function(){
+		let id=$('#id').val()
+		if(id.trim()==="")
+		{
+			$('#id').focus()
+			return
+		}
+		let pwd=$('#pwd').val()
+		if(pwd.trim()==="")
+		{
+			$('#pwd').focus()
+			return
+		}
+		
+		$('#frm').submit()
+	})
+})
+</script>
 <style type="text/css">
+a.alink:hover{
+	cursor: pointer;
+}
 #title{
 	padding-top: 3%;
 }
-#newBtn{
+#logBtn{
 	margin: 0px auto;
 	margin-bottom: 2%;
 	border:1px solid #00B98E;   
@@ -29,7 +51,7 @@
 	font-weight:bold; 
 	font-size: 50px;
 }
-#text{
+#id, #pwd{
 	width: 400px;
 	height: 70px; 
 }
@@ -46,13 +68,14 @@ input: {
 </head>
 <body>
 <div style="height: 100px"></div>
-	<div class="container-xxl bg-white p-0" id="loginApp">
+	<div class="container-xxl bg-white p-0">
 		<!-- 제목 -->
 		<div id="title">
 			<h2 class="text-center" id="title"></h2>
 		</div>
 		<!-- 로그인 -->
 		<div class="row row1">
+		  <form method="POST" action="../member/login.do" id="frm">
       		<table class="table" style="width: 40%;margin: 0px auto;border: 1px solid lightgrey;margin-bottom: 10%;">
       			<tr style="border: none;">
       				<td width="80%" class="text-center" id="logintitle">
@@ -61,79 +84,40 @@ input: {
       			</tr>
       			<tr style="border: none;">
       				<td width="80%" class="text-center">
-      					<input type=text ref="id" class="input-sm" v-model="id" placeholder="아이디" id="text">
+      					<input type=text class="input-sm" name="userId" placeholder="아이디" id="id">
       				</td>
       			</tr>
       			<tr style="border: none;">
       				<td width="80%" class="text-center">
-      					<input type=password ref="pwd" class="input-sm" v-model="pwd" placeholder="비밀번호" id="text">
+      					<input type=password class="input-sm" name="userPwd" placeholder="비밀번호" id="pwd">
       				</td>
       			</tr>
       			<tr style="border: none;">
-      				<td colspan="2" class="inline text-center">
-			             <input type="checkbox" ref="ck" v-model="ck">&nbsp;ID저장
+      				<td colspan="2" class="text-center">
+			             <input type="checkbox" name="remember-me">&nbsp;자동 로그인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			             <a href="../member/idfind.do">아이디 찾기</a>&nbsp;
+			     		 <a href="../member/pwdchange.do">비밀번호 변경</a>
 			        </td>
       			</tr>
+      			<tr>
+          			<td colspan="2" class="text-center" style="color: red">${message }</td>
+          		</tr>
       			<tr style="border: none;">
       				<td colspan="2" class="text-center inline">
-      					<input type="button" value="로그인" class="btn-sm btn-danger" @click="login()" id="newBtn">
+      					<input type="button" value="로그인" class="btn-sm btn-danger" id="logBtn">
       				</td>
       			</tr>
+      			<tr style="border: none;">
+      				<td colspan="2" class="text-center" style="padding-top: 0px">
+      					<a onclick="javascript:history.back()" class="alink">취소</a>
+			        </td>
+      			</tr>
       		</table>
+      	  </form>
       	</div>
 	</div>
 <script>
- let loginApp=Vue.createApp({
-	 data(){
-		 return{
-			 id:'${userId}',
-			 pwd:'',
-			 ck:true
-		 }
-	 },
-	 methods:{
-		 login(){
-			 if(this.id==='')
-			 {
-				 alert("ID를 입력하세요.")
-				 this.$refs.id.focus()
-				 return
-			 }
-			 if(this.pwd==='')
-			 {
-				 alert("패스워드를 입력하세요.")
-				 this.$refs.pwd.focus()
-				 return
-			 }
-			 axios.get('../member/login_ok_vue.do',{
-				 params:{
-					 userId:this.id,
-					 userPwd:this.pwd,
-					 ck:this.ck
-				 }
-			 }).then(response=>{
-				 if(response.data==='NOID')
-				 {
-					alert("ID가 존재하지 않습니다.")
-					this.id=''
-					this.pwd=''
-					this.ck=false
-					this.$refs.id.focus()
-				 }
-				 else if(response.data==='NOPWD')
-			     {	
-					alert("비밀번호가 일치하지 않습니다.")
-					this.pwd=''
-					this.$refs.pwd.focus()
-			     }
-				 else
-				 {
-					location.href='../main/main.do' 
-				 }
-			 })
-		 }
-	 }
- }).mount('#loginApp')
+ 
 </script>
 </body>
 </html>

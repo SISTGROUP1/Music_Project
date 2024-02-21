@@ -1,19 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-$(function(){
-   $('#notice').click(function(){
-      window.location.href = "../musicboard/notice.do";
-   })
-})
-</script>
 <style type="text/css">
 a#notice:hover{
 	cursor: pointer;
@@ -21,6 +15,12 @@ a#notice:hover{
 </style>
 </head>
 <body>
+
+<!-- 인증된 상태 -->
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+
 <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
@@ -37,14 +37,7 @@ a#notice:hover{
                         <a href="../resources/views/about.html" class="nav-item nav-link">About</a>
                         
                         <!-- 게시판 header -->
-                        <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="notice">게시판</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="../musicboard/notice.do" class="dropdown-item">공지사항</a>
-                                <a href="../musicboard/question.do" class="dropdown-item">문의하기</a>
-                                <a href="../musicboard/schand.do" class="dropdown-item">중고거래</a>
-                            </div>
-                        </div>
+                        <a href="../musicboard/notice.do" class="nav-item nav-link">게시판</a>
                         
                         
                         <div class="nav-item dropdown">
@@ -55,11 +48,19 @@ a#notice:hover{
                             </div>
                         </div>
                         <a href="../musicnews/list.do" class="nav-item nav-link">매거진</a>
+                        
+                        <sec:authorize access="hasRole('ROLE_USER')">        
+	                    	<a href="../mypage/main.do" class="nav-item nav-link">마이페이지</a>   
+	                    </sec:authorize>
+	                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+		                    <a href="../admin/main.do" class="nav-item nav-link">관리자페이지</a>
+	                    </sec:authorize>
                     </div>
-                    <c:if test="${sessionScope.userId==null }">
+                    
+                    <c:if test="${principal.username==null }">
                      	<a href="../member/sclogin.do" class="btn btn-primary px-3 d-none d-lg-flex">Login</a>
                 	</c:if>
-                	<c:if test="${sessionScope.userId!=null }">
+                	<c:if test="${principal.username!=null }">
                      	<a href="../member/logout.do" class="btn btn-primary px-3 d-none d-lg-flex">Logout</a>
                 	</c:if>
                 </div>

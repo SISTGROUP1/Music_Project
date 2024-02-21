@@ -36,6 +36,26 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return mDao.memberLogin(userId, userPwd);
 	}
+
+	@Override
+	public String idFindOpen(String userName, String email) {
+		// TODO Auto-generated method stub
+		return mDao.idFindOpen(userName, email);
+	}
+
+	@Override
+	public MemberVO pwdChange(String userId, String email, String userPwd) {
+		// TODO Auto-generated method stub
+		return mDao.pwdChange(userId, email, userPwd);
+	}
+
+	@Override
+	public void lastLoginUpdate(String userId) {
+		// TODO Auto-generated method stub
+		mDao.lastLoginUpdate(userId);
+	}
+
 	
+
 	
 }

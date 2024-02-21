@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -50,4 +51,32 @@ public class MemberDAO {
 		   }
 		   return dbVO;
 	}
+	
+	public void lastLoginUpdate(String userId)
+	{
+		mapper.lastLoginUpdate(userId);
+	}
+	
+	// 아이디 찾기
+	public String idFindOpen(String userName, String email)
+	{
+		String msg="";
+		int count=mapper.idFind(userName, email);
+		if(count==0)
+		{
+			msg="NO";
+		}
+		else
+		{
+			msg=mapper.idFindOpen(userName, email);
+		}
+		return msg;
+	}
+	
+	// 비밀번호 변경
+	public MemberVO pwdChange(String userId, String email, String userPwd)
+	{
+		return mapper.pwdChange(userId, email, userPwd);
+	}
+	
 }

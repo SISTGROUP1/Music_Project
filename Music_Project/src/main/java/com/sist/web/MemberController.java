@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
@@ -43,16 +44,23 @@ public class MemberController {
 		return "member/sclogin";
 	}
     
-    @GetMapping("member/login.do")
+    @RequestMapping("member/login.do")
     public String member_login()
     {
     	return "member/login";
     }
     
-    @GetMapping("member/logout.do")
-    public String member_logout(HttpSession session)
+    ///////////////////////////////////////////////////////
+    @GetMapping("member/idfind.do")
+    public String member_idfind()
     {
-    	session.invalidate();
-    	return "redirect:../main/main.do";
+    	return "member/idfind";
     }
+    
+    @GetMapping("member/pwdchange.do")
+    public String member_pwdchange()
+    {
+    	return "member/pwdchange";
+    }
+    
 }
