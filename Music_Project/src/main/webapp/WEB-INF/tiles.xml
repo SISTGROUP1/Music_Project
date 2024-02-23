@@ -15,4 +15,9 @@
 		<put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"/> <!-- home만 바꾸고 나머지는 유지 -->
 	</definition>
 	
+	<!-- chat -->
+	<definition name="*/*/*" extends="main">
+		<put-attribute name="home" value="/site/chat/chat.jsp"/>
+	</definition>
+	
 </tiles-definitions>
