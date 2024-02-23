@@ -44,6 +44,10 @@ a#notice:hover{
                         </div>
                         <a href="../musicnews/list.do" class="nav-item nav-link">매거진</a>
                         
+                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">   
+                        	<a href="../chat/chat.do" class="nav-item nav-link">실시간 채팅</a>
+                        </sec:authorize>
+                        
                         <sec:authorize access="hasRole('ROLE_USER')">        
 	                    	<a href="../mypage/main.do" class="nav-item nav-link">마이페이지</a>   
 	                    </sec:authorize>

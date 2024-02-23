@@ -57,7 +57,7 @@ public interface MusicBoardMapper {
 	
 	// schand 새 글 작성
 	@Insert("INSERT INTO musicBoard(no, typeno, title, name, content, regdate, hit, pwd) "
-			+"VALUES(mb_no_seq.nextval, 4, #{title}, #{name}, #{content}, SYSDATE, 0, pwd)")
+			+"VALUES(mb_no_seq.nextval, 4, #{title}, #{name}, #{content}, SYSDATE, 0, #{pwd})")
     public void schandInsert(MusicBoardVO vo);
    
     // 상세보기 (조회수 증가)
