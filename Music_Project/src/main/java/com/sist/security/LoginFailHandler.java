@@ -12,20 +12,19 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+import lombok.Setter;
+
 public class LoginFailHandler implements AuthenticationFailureHandler{
 
+	@Setter
 	private String defaultFailureUrl;
-	
-	public void setDefaultFailureUrl(String defaultFailureUrl) {
-		this.defaultFailureUrl = defaultFailureUrl;
-	}
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("로그인 실패");
-		String errorMsg="아이디 또는 비밀번호가 일치하지 않습니다.";
+		String errorMsg="";
 		try
 		{
 			if(exception instanceof BadCredentialsException)

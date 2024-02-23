@@ -11,6 +11,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
+import com.sist.manager.MailManager;
 import com.sist.service.*;
 import com.sist.vo.*;
 @Controller
@@ -20,6 +21,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+    private MailManager mm;
 	
 	@GetMapping("member/join.do")
     public String member_join()
@@ -35,6 +39,8 @@ public class MemberController {
     	vo.setUserPwd(enPwd);
     	mService.memberInsert(vo);
     	mService.memberAuthorityInsert(vo.getUserId());
+    	
+    	mm.mailMemberSender(vo);
     	return "main";
     }
     
@@ -50,17 +56,16 @@ public class MemberController {
     	return "member/login";
     }
     
-    ///////////////////////////////////////////////////////
     @GetMapping("member/idfind.do")
     public String member_idfind()
     {
     	return "member/idfind";
     }
     
-    @GetMapping("member/pwdchange.do")
+    /*@GetMapping("member/pwdchange.do")
     public String member_pwdchange()
     {
     	return "member/pwdchange";
-    }
+    }*/
     
 }

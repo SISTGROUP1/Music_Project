@@ -26,10 +26,7 @@ a.alink:hover{
 </style>
 </head>
 <body>
-<!-- 인증된 상태 -->
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal"/>
-</sec:authorize>
+
 
 	<div style="height: 100px"></div>
 		<div class="container-xxl bg-white p-0" id="noticeInsertApp">

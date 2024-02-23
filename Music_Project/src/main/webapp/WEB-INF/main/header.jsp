@@ -16,11 +16,6 @@ a#notice:hover{
 </head>
 <body>
 
-<!-- 인증된 상태 -->
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal"/>
-</sec:authorize>
-
 <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
@@ -57,23 +52,23 @@ a#notice:hover{
 	                    </sec:authorize>
                     </div>
                     
-                    <c:if test="${principal.username==null }">
+                    <c:if test="${sessionScope.userId==null }">
                      	<a href="../member/sclogin.do" class="btn btn-primary px-3 d-none d-lg-flex">Login</a>
                 	</c:if>
-                	<c:if test="${principal.username!=null }">
+                	<c:if test="${sessionScope.userId!=null }">
                      	<a href="../member/logout.do" class="btn btn-primary px-3 d-none d-lg-flex">Logout</a>
                 	</c:if>
                 	
                 	
                 </div>
                 
-                <c:if test="${principal.username==null }">
+                <c:if test="${sessionScope.userId==null }">
 			      	
 				</c:if>
-				<c:if test="${principal.username!=null }">
+				<c:if test="${sessionScope.userId!=null }">
 				    <div class="fl_right">
 				      	&nbsp;&nbsp;
-				        ${sessionScope.member.userName }(
+				        ${sessionScope.userName }(
 				        <sec:authorize access="hasRole('ROLE_ADMIN')">관리자</sec:authorize>
 				        <sec:authorize access="hasRole('ROLE_USER')">일반사용자</sec:authorize>
 				        )님 환영합니다.

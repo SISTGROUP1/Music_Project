@@ -36,7 +36,7 @@ public interface MemberMapper {
 	public void lastLoginUpdate(String userId);
 	
 	// session
-	@Select("SELECT mu.userId, userName, gender, birth, email, phone, addr1, addr2, enabled, authority "
+	@Select("SELECT mu.userId, userName, gender, birth, email, phone, addr1, addr2, post,  enabled, authority "
 			 +"FROM musicUserInfo mu, musicAuthority ma "
 			 +"WHERE mu.userId=ma.userId "
 			 +"AND mu.userId=#{userId}")
