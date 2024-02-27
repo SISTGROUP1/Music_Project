@@ -34,6 +34,16 @@ a#notice:hover{
                         <!-- 게시판 header -->
                         <a href="../musicboard/notice.do" class="nav-item nav-link">게시판</a>
                         
+                        <!-- 음악게시판 -->
+                        <div class="nav-item dropdown">
+                            <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">음악</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="../musicfind/list.do?cate=1" class="dropdown-item">TOP 200</a>
+                                <a href="../musicfind/list.do?cate=2" class="dropdown-item">최신 음악</a>
+                                <a href="../musicfind/list.do?cate=3" class="dropdown-item">장르 음악</a>
+                            </div>
+                        </div>
+                        <!-- 끝 -->
                         
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>

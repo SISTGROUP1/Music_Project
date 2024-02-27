@@ -14,6 +14,8 @@ import com.sist.service.*;
 import com.sist.vo.*;
 @Controller
 public class MainController {
+	@Autowired
+	private MusicFindService mfService;
 	
 	@Autowired
 	private MusicNewsService mnService;
@@ -43,6 +45,12 @@ public class MainController {
 		model.addAttribute("musicNewsList", musicNewsList);
 		List<CdlpVO> cdlpList=cService.cdlpListData_Home();
 		model.addAttribute("cdlpList", cdlpList);
+		
+		List<MusicFindVO> mfList = mfService.gmusicTop10(1);
+		List<MusicFindVO> newMusicList = mfService.gmusicTop10(2);
+		
+		model.addAttribute("mfList",mfList);
+		model.addAttribute("newMusicList",newMusicList);
 		
 		return "main";
 	}

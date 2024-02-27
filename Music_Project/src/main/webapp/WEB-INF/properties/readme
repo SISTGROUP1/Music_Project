@@ -1,3 +1,12 @@
 portone 코드 첨부해주십쇼
 project.properties 생성해주시고
 imp=포트원 결제 코드
+
+apikey.properties 생성
+https://openweathermap.org/api 가입 
+
+API => CURRENT Weather Data => Subscribe => Free Get API KEY => My API KEY 확인
+
+apikey=Weather apikey 입력
+naverapiKey=네이버 개발자센터 apikey 입력
+naverId=네이버 개발자센터 id입력

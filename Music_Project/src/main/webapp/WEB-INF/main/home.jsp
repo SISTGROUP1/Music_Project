@@ -20,19 +20,57 @@
         <div class="container-fluid header bg-white p-0">
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">Find A <span class="text-primary">Perfect Home</span> To Live With Your Family</h1>
-                    <p class="animated fadeIn mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
-                        sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                    <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Get Started</a>
+                    <h1 class="display-5 animated fadeIn mb-4">차트 <span class="text-primary">200</span> 위</h1>
+                    <table class="table">
+                    	<c:forEach var="vo" items="${mfList }">
+	                    	<tr>
+	                    		<td class="text-center">${vo.grank }</td>
+	                    		<td class="text-center">
+	                    			<c:choose>
+	                    				<c:when test="${vo.rank_change eq '유지'}">
+	                    					-
+	                    				</c:when>
+	                    				<c:when test="${vo.rank_change eq '상승'}">
+	                    					<span style="color: red; ">▲ ${vo.rank_value }</span>
+	                    				</c:when>
+	                    				<c:when test="${vo.rank_change eq '하강'}">
+	                    					<span style="color: blue; ">▼ ${vo.rank_value }</span>
+	                    				</c:when>
+	                    				<c:otherwise>
+	                    					new
+	                    				</c:otherwise>
+	                    			</c:choose>
+	                    		</td>
+	                    		<td>${vo.song }</td>
+	                    		<td>${vo.artist }</td>
+	                    		<td><img src="${vo.image }" style="width:30px;height:30px;"></td>
+	                    	</tr>
+                    	</c:forEach>
+                    </table>
+                   <div class="text-center"> <a href="../musicfind/list.do?cate=1" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">TOP200 바로가기 ></a></div>
                 </div>
                 <div class="col-md-6 animated fadeIn">
+                	<div class="col-md-12 p-5 mt-lg-5">
+                	<h4 class="display-5 animated fadeIn mb-4">HOT &amp; NEW</h4>
                     <div class="owl-carousel header-carousel">
+                    	<%-- <c:forEach var="vo" items="${mfList }">
+	                        <div class="owl-carousel-item">
+	                            <img class="img-fluid" src="${vo.image }" alt="">
+	                        </div>
+                        </c:forEach> --%>
                         <div class="owl-carousel-item">
-                            <img class="img-fluid" src="../resources/img/carousel-1.jpg" alt="">
-                        </div>
+	                         <img class="img-fluid" src="https://image.genie.co.kr/Y/IMAGE/IMG_MUZICAT/IV2/Event/2024/2/21/ban_26596_202422110554.jpg" alt="">
+	                    </div>
                         <div class="owl-carousel-item">
-                            <img class="img-fluid" src="../resources/img/carousel-2.jpg" alt="">
-                        </div>
+	                         <img class="img-fluid" src="https://image.genie.co.kr/Y/IMAGE/IMG_MUZICAT/IV2/Event/2024/2/27/ban_26592_2024227112422.jpg" alt="">
+	                    </div>
+	                    <div class="owl-carousel-item">
+	                       	<img class="img-fluid" src="https://image.genie.co.kr/Y/IMAGE/IMG_MUZICAT/IV2/Event/2024/2/27/ban_26593_2024227112454.jpg" alt="">
+	                    </div>
+	                    <div class="owl-carousel-item">
+	                       	<img class="img-fluid" src="https://image.genie.co.kr/Y/IMAGE/IMG_MUZICAT/IV2/Event/2024/2/21/ban_26588_2024221105654.jpg" alt="">
+	                    </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -72,8 +110,31 @@
             </div>
         </div>
         <!-- Search End -->
-        
         <!-- Category Start -->
+        <!-- 음악 카테고리 -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">최신 음악</h1>
+                </div>
+                <div class="row g-4">
+                	<c:forEach var="vo" items="${newMusicList }" begin="1" end="8" varStatus="i">
+	                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+	                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+	                            <div class="rounded p-4">        
+	                                <div class="icon mb-3">
+	                                    <img class="img-fluid" src="${vo.image }" alt="Icon">
+	                                </div>
+	                                <h6>${vo.song }</h6>
+	                                <span>${vo.artist }</span>
+	                            </div>
+	                        </a>
+	                    </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+        <!-- Category End -->
         <!-- /////////////// CD/LP 출력 구간 Start /////////////// -->
         <div class="container-xxl py-5">
             <div class="container">
