@@ -1,5 +1,6 @@
 pom.properties
 db.properties
+project.properties
 */target/*
 /build/
 MANIFEST.MF

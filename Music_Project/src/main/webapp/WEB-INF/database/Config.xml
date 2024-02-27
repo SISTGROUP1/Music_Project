@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.sist.vo.CdlpVO" alias="CdlpVO"/>
+		<typeAlias type="com.sist.vo.CartVO" alias="CartVO"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/sist/mapper/cdlp-mapper.xml"/>
+		<mapper resource="com/sist/mapper/cart-mapper.xml"/>
+	</mappers>
+</configuration>

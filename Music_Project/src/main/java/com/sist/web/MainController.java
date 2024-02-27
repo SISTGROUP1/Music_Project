@@ -20,6 +20,8 @@ public class MainController {
 	
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private CdlpService cService;
 	
 	@GetMapping("main/main.do")
 	public String main_main(Model model, Principal p, HttpSession session)
@@ -39,6 +41,8 @@ public class MainController {
 		// 음악뉴스 홈
 		List<MusicNewsVO> musicNewsList=mnService.musicNews3();
 		model.addAttribute("musicNewsList", musicNewsList);
+		List<CdlpVO> cdlpList=cService.cdlpListData_Home();
+		model.addAttribute("cdlpList", cdlpList);
 		
 		return "main";
 	}

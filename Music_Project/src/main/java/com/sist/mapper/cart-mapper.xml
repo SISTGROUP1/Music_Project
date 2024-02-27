@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.CartMapper">
+	<resultMap type="CdlpVO" id="cdlpMap">
+		<result property="poster" column="poster"/>
+		<result property="subject" column="subject"/>
+		<result property="price" column="price"/>
+		<result property="saleprice" column="saleprice"/>
+		<result property="discount" column="discount"/>
+	</resultMap>
+	<resultMap type="CartVO" id="cartMap">
+		<result property="no" column="no"/>
+		<result property="clno" column="clno"/>
+		<result property="amount" column="amount"/>
+		<result property="userId" column="userId"/>
+		<association property="cvo" resultMap="cdlpMap"/>
+	</resultMap>
+	<select id="cartData_payment" resultMap="cartMap" parameterType="map">
+		SELECT cart.no,clno,poster,subject,price,saleprice,discount,amount
+		FROM cdlp JOIN cart
+		ON cdlp.no=cart.clno
+		WHERE cart.userId=#{userId}
+		<if test="type==0">
+			AND cart.no=#{no}
+		</if>
+		<if test="type==1">
+			AND clno=#{no}
+		</if>
+	</select>
+</mapper>

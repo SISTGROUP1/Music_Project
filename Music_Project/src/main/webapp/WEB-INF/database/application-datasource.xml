@@ -26,6 +26,7 @@
 	<bean id="ssf"
 		class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="ds"
+		p:configLocation="/WEB-INF/database/Config.xml"
 	/>
 	<!-- mapper구현 (인터페이스) -->
 	<mybatis-spring:scan base-package="com.sist.mapper"/>

@@ -42,6 +42,7 @@ a#notice:hover{
                                 <a href="../resources/views/404.html" class="dropdown-item">404 Error</a>
                             </div>
                         </div>
+                        <a href="../cdlp/list.do?genre=OST" class="nav-item nav-link">CD/LP</a>
                         <a href="../musicnews/list.do" class="nav-item nav-link">매거진</a>
                         
                         <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">   

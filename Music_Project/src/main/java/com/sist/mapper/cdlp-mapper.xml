@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.CdlpMapper">
+	<sql id="select_cdlpList">
+		SELECT no,poster,subject,artist,publisher,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,saleprice,discount,score,inventory,num
+		FROM (SELECT no,poster,subject,artist,publisher,regdate,saleprice,discount,score,inventory,rownum as num
+		FROM (SELECT no,poster,subject,artist,publisher,regdate,saleprice,discount,score,inventory
+		FROM cdlp
+	</sql>
+	<sql id="where_genre">
+		WHERE genre=#{genre}
+		<if test="sub_genre!=''">
+			 AND sub_genre=#{sub_genre}
+		</if>
+	</sql>
+	<sql id="where_paging">
+		WHERE num BETWEEN #{start} AND #{end}
+	</sql>
+	<select id="cdlpListData_Sort" parameterType="map" resultType="CdlpVO">
+		<include refid="select_cdlpList"></include>
+		<!-- <if test="#{listType}==0">
+			JOIN Order
+			ON cdlp_test.no=Order.clno
+			ORDER BY no DESC	
+		</if> -->
+		<include refid="where_genre"></include>
+		<if test="listType==1">
+			ORDER BY regdate DESC
+		</if>
+		<if test="listType==2">
+			ORDER BY saleprice
+		</if>
+		<if test="listType==3">
+			ORDER BY saleprice DESC
+		</if>
+		))
+		<include refid="where_paging"></include>
+	</select>
+	<select id="cdlpListTotalPage" parameterType="CdlpVO" resultType="int">
+		SELECT CEIL(COUNT(*)/20)
+		FROM cdlp
+		WHERE genre=#{genre}
+		<if test="sub_genre!=''">
+			AND sub_genre=#{sub_genre}
+		</if>
+	</select>
+</mapper>
