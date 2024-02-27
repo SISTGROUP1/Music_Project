@@ -145,14 +145,14 @@
                 <div class="row g-4">
                 	<!-- 발매일순으로 출력 -->
                 	<!-- 한 줄에 4개씩 출력 -->
-                	<c:forEach var="vo" items="${list }">
+                	<c:forEach var="vo" items="${cdlpList }">
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item d-block bg-light text-center p-3" href="">
-                               <div class="icon mb-3" style="border-radius: 0;">
-                                   <img src="${vo.poster }" style="width: 100%">
-                               </div>
-                               <h6 style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">${vo.subject }</h6>
-                               <!-- <span>123 Properties</span> -->
+                            <div class="icon mb-3" style="border-radius: 0;">
+                                <img src="${vo.poster }" style="width: 100%">
+                            </div>
+                            <h6 style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">${vo.subject }</h6>
+                            <!-- <span>123 Properties</span> -->
                         </a>
                     </div>
                     </c:forEach>

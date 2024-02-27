@@ -20,9 +20,6 @@ public class CdlpDAO {
 	public List<CdlpVO> cdlpCateList() {
 		return mapper.cdlpCateList();
 	}
-//	public List<CdlpVO> cdlpListData_RecentM(int start, int end) {
-//		return mapper.cdlpListData_RecentM(start, end);
-//	}
 	public List<CdlpVO> cdlpListData_Sort(Map map) {
 		return mapper.cdlpListData_Sort(map);
 	}
@@ -31,5 +28,8 @@ public class CdlpDAO {
 	}
 	public CdlpVO cdlpDetailData(int no) {
 		return mapper.cdlpDetailData(no);
+	}
+	public List<CdlpVO> cdlpSalesTop6() {
+		return mapper.cdlpSalesTop6();
 	}
 }

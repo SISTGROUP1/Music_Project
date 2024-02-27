@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,34 +25,19 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
-                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Our Services</a>
-                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                        <h5 class="text-white mb-4">신곡 관련 뉴스</h5>
+                        <c:forEach var="vo" items="${findList }" begin="0" end="4">
+                        	<a class="btn btn-link text-white-50" href="${vo.link }" target="_blank" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">${vo.title }</a>
+                        </c:forEach>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Photo Gallery</h5>
+                        <h5 class="text-white mb-4">CD/LP 베스트셀러</h5>
                         <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="../resources/img/property-1.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="../resources/img/property-2.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="../resources/img/property-3.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="../resources/img/property-4.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="../resources/img/property-5.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="../resources/img/property-6.jpg" alt="">
-                            </div>
+                        	<c:forEach var="vo" items="${cdlpSalesTopList }">
+	                            <div class="col-4">
+	                                <img class="img-fluid rounded bg-light p-1" src="${vo.poster }" alt="">
+	                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">

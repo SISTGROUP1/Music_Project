@@ -24,11 +24,6 @@ public class CdlpServiceImpl implements CdlpService {
 		return cDao.cdlpCateList();
 	}
 
-//	@Override
-//	public List<CdlpVO> cdlpListData_RecentM(int start, int end) {
-//		return cDao.cdlpListData_RecentM(start, end);
-//	}
-
 	@Override
 	public List<CdlpVO> cdlpListData_Sort(Map map) {
 		return cDao.cdlpListData_Sort(map);
@@ -42,6 +37,11 @@ public class CdlpServiceImpl implements CdlpService {
 	@Override
 	public CdlpVO cdlpDetailData(int no) {
 		return cDao.cdlpDetailData(no);
+	}
+
+	@Override
+	public List<CdlpVO> cdlpSalesTop6() {
+		return cDao.cdlpSalesTop6();
 	}
 
 }
