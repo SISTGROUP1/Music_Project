@@ -36,4 +36,5 @@ public interface MusicFindService {
 	public void MyMusicInsert(MyMusicVO vo);
 	public List<MusicFindVO> MyMusicList(String userId);
 	public void MyMusicDelete(int num);
+	public List<MusicFindVO> footerMV();
 }

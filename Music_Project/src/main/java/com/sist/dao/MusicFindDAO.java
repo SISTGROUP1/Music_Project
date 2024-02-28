@@ -95,4 +95,7 @@ public class MusicFindDAO {
 	public void MyMusicDelete(int num) {
 		mapper.MyMusicDelete(num);
 	}
+	public List<MusicFindVO> footerMV(){
+		return mapper.footerMV();
+	}
 }

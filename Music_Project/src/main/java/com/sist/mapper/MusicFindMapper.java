@@ -133,4 +133,7 @@ public interface MusicFindMapper {
 	
 	@Delete("DELETE FROM GMYMUSIC WHERE num=#{num}")
 	public void MyMusicDelete(int num);
+	
+	@Select("SELECT gnum,image,num FROM (SELECT gnum,image,rownum AS num FROM GMUSICFIND WHERE mv='뮤비' ORDER BY gnum) WHERE num BETWEEN 1 AND 6")
+	public List<MusicFindVO> footerMV();
 }

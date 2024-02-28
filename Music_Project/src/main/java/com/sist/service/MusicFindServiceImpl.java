@@ -168,5 +168,11 @@ public class MusicFindServiceImpl implements MusicFindService{
 		// TODO Auto-generated method stub
 		gmDao.MyMusicDelete(num);
 	}
+
+	@Override
+	public List<MusicFindVO> footerMV() {
+		// TODO Auto-generated method stub
+		return gmDao.footerMV();
+	}
 	
 }
