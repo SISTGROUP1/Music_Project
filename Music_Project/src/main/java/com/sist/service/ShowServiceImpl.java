@@ -55,21 +55,4 @@ public class ShowServiceImpl implements ShowService {
 	}
 
 	// 후기
-	@Override
-	public List<ReplyVO> showreplyListData(int sno) {
-		// TODO Auto-generated method stub
-		return dao.showreplyListData(sno);
-	}
-	
-	@Override
-	public int countshowreview(int sno) {
-		// TODO Auto-generated method stub
-		return dao.countshowreview(sno);
-	}
-
-	@Override
-	public void showreplyInsert(ReplyVO vo) {
-		// TODO Auto-generated method stub
-		dao.showreplyInsert(vo);
-	}
 }

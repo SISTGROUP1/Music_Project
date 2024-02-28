@@ -78,7 +78,7 @@ $(function() {
 <div style="height: 30px"></div>
   </table>
 <a @click="showInfo" id="info" style="font-size: x-large;margin-left: 41%;">상세정보&nbsp;|&nbsp;</a>
-<a @click="showReview" id="review" style="font-size: x-large;">리뷰<small>({{count}}건)</small></a>
+<a @click="showReview" id="review" style="font-size: x-large;">리뷰<small>({{reply_cnt}}건)</small></a>
 <div style="height: 30px;"></div>
   <table class="table text-center" v-show="isShowInfo">
     <tr v-for="dp in sdeposter">
@@ -146,7 +146,8 @@ $(function() {
 	    	  sessionId:'${sessionId}',
 	    	  msg:'',
 	    	  u:0,
-	    	  count:0
+	    	  reply_cnt:0,
+	    	  score:0
 		  }
 	  },
 	  mounted(){
@@ -157,9 +158,6 @@ $(function() {
 		  }).then(response=>{
 			  console.log(response.data)
 			  this.show_detail=response.data.show_detail
-			  this.reply_list=response.data.reply_list
-			  this.count=response.data.count
-			  this.like_list=response.data.like_list
 			  this.sdeposter=response.data.show_detail.sdeposter.split(",")
 			  if(window.kakao && window.kakao.maps)
 			  {
@@ -170,11 +168,35 @@ $(function() {
 				  this.addScript()
 			  }
 		  })
+		  this.replyList()
 	  },
 	  methods:{
-		     likeBtn(){
-		    	 
-		     },
+		  replyList(){
+				axios.get('../reply/reply_list.do',{
+					params:{
+						fno:this.sno,
+						typeno:5,
+						page:this.review_page
+					}
+				}).then(response=>{
+					this.reply_list=response.data.reply_list
+					this.reply_cnt=response.data.reply_cnt					
+					console.log(this.reply_list)
+				})
+				
+				axios.get('../reply/reply_page.do',{
+					params:{
+						fno:this.sno,
+						typeno:5,
+						page:this.review_page
+					}
+				}).then(response=>{
+					this.review_page=response.data.curpage
+					this.totalpage=response.data.totalpage
+					this.startPage=response.data.startPage
+					this.endPage=response.data.endPage
+				})
+			},
 	    	 updateForm(no){
 	    		$('.ups').hide();
 	    		$('#up'+no).val('수정')
@@ -192,16 +214,18 @@ $(function() {
 	    		    $('#up'+no).val('수정')
 	    		}
 	    	 },
+	    	 
 	    	 replyDelete(no){
-	    		axios.get('../recipe/reply_delete_vue.do',{
+	    		axios.get('../reply/reply_delete.do',{
 	    		  params:
 	    			  {
 	    			      no:no,
-	    			      sno:this.no
+	    			      sno:this.no,
+	    			      typeno:5
 	    			  }
 	    			
 	    		}).then(response=>{
-	    			this.reply_list=response.data
+	    			this.replyList()
 	    		}) 
 	    	 },
 	    	 replyInsert(){
@@ -211,7 +235,7 @@ $(function() {
 	    			return
 	    		}
 	    		
-	    		axios.post('../recipe/reply_insert_vue.do',null,{
+	    		axios.get('../reply/reply_insert.do',{
 	    			params:{
 	    				fno:this.sno,
 	    				msg:this.msg,
@@ -219,7 +243,7 @@ $(function() {
 	    			}
 	    		}).then(response=>{
 	    			console.log(response.data)
-	    			this.reply_list=response.data
+	    			this.replyList()
 	    			this.msg=''
 	    		})
 	    	 },

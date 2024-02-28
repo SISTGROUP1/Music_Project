@@ -38,6 +38,7 @@ public class ReserveRestController {
 		       
 		   }catch(Exception ex)
 		   {
+			   ex.printStackTrace();
 			   result="no";
 		   }
 		   return result;

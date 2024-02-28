@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.CdlpService;
 import com.sist.service.LikeService;
-import com.sist.service.ReplyService;
+import com.sist.service.*;
 import com.sist.vo.LikeVO;
 import com.sist.vo.ReplyVO;
 

@@ -100,42 +100,13 @@ public class ShowRestController {
     public String food_detail(int sno) throws Exception
     {
 		ShowVO vo=service.showDetailData(sno);
-
-	    //리뷰 목록
-	    List<ReplyVO> list=service.showreplyListData(sno);
-	    int count=service.countshowreview(sno);
     	
     	Map map=new HashMap();
     	map.put("show_detail", vo);
-    	map.put("reply_list", list);
-    	map.put("count", count);
     	
     	ObjectMapper mapper=new ObjectMapper();
     	String json=mapper.writeValueAsString(map);
     	
     	return json;
     }
-	
-	//리뷰
-	public String commonsReplyData(int rno) throws Exception
-   {
-	   ObjectMapper mapper=new ObjectMapper();
-	   List<ReplyVO> list=service.showreplyListData(rno);
-	   String json=mapper.writeValueAsString(list);
-	   return json;
-   }
-    @PostMapping(value="recipe/reply_insert_vue.do",produces = "text/plain;charset=UTF-8")
-    public String reply_insert(ReplyVO vo,HttpSession session) throws Exception
-    {
-	    try
-	    {
-	    	String userId=(String)session.getAttribute("userId");
-	    	String userName=(String)session.getAttribute("userName");
-	    	vo.setUserId(userId);
-	    	vo.setUserName(userName);
-	   
-	    	service.showreplyInsert(vo);
-	   }catch(Exception ex) {ex.printStackTrace();}
-	   return commonsReplyData(vo.getFno());
-   }
 }
