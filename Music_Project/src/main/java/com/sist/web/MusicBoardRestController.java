@@ -14,7 +14,7 @@ import com.sist.vo.MusicBoardVO;
 import com.sist.vo.MusicNewsVO;
 
 @RestController
-public class MusicBoardRestCotroller {
+public class MusicBoardRestController {
 	@Autowired
 	private MusicBoardService service;
 	

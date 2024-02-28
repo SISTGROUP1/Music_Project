@@ -41,7 +41,7 @@ public class MemberController {
     	mService.memberAuthorityInsert(vo.getUserId());
     	
     	mm.mailMemberSender(vo);
-    	return "main";
+    	return "redirect:../main/main.do";
     }
     
     @GetMapping("member/sclogin.do")

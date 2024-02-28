@@ -9,7 +9,7 @@ import com.sist.service.MusicBoardService;
 import com.sist.vo.MusicBoardVO;
 
 @Controller
-public class MusicBoardCotroller {
+public class MusicBoardController {
 	
 	@GetMapping("musicboard/notice.do")
 	public String musicboard_notice()
