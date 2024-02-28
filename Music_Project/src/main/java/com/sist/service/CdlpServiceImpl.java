@@ -44,4 +44,14 @@ public class CdlpServiceImpl implements CdlpService {
 		return cDao.cdlpSalesTop6();
 	}
 
+	@Override
+	public double cdlpScore(int fno) {
+		return cDao.cdlpScore(fno);
+	}
+
+	@Override
+	public void cdlpScoreUpdate(double score, int no) {
+		cDao.cdlpScoreUpdate(score, no);
+	}
+
 }

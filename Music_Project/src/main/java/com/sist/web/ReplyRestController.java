@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sist.service.CdlpService;
 import com.sist.service.LikeService;
 import com.sist.service.ReplyService;
 import com.sist.vo.LikeVO;
@@ -23,6 +24,8 @@ public class ReplyRestController {
 	private ReplyService rService;
 	@Autowired
 	private LikeService lService;
+	@Autowired
+	private CdlpService cService;
 	
 	@GetMapping(value = "reply/reply_list.do",produces = "text/plain;charset=UTF-8")
 	public String replyListData(ReplyVO vo) throws Exception {
@@ -57,11 +60,19 @@ public class ReplyRestController {
 		vo.setUserId(userId);
 		vo.setUserName(userName);
 		rService.replyInsert(vo);
+		
+		double score=cService.cdlpScore(vo.getFno());
+		cService.cdlpScoreUpdate(Double.parseDouble(String.format("%.1f", score)), vo.getFno());
+		
 		return replyListData(vo);
 	}
 	@GetMapping(value = "reply/reply_delete.do",produces = "text/plain;charset=UTF-8")
 	public String reply_delete(ReplyVO vo) throws Exception {
 		rService.replyDelete(vo);
+		
+		double score=cService.cdlpScore(vo.getFno());
+		cService.cdlpScoreUpdate(Double.parseDouble(String.format("%.1f", score)), vo.getFno());
+		
 		return replyListData(vo);
 	}
 	@PostMapping(value = "reply/reply_update.do",produces = "text/plain;charset=UTF-8")

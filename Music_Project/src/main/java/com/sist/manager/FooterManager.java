@@ -53,9 +53,6 @@ public class FooterManager {
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL,requestHeaders);
 
-
-        System.out.println(responseBody);
-        
         List<FindVO> list=new ArrayList<FindVO>();
         try {
 			JSONParser jp=new JSONParser();

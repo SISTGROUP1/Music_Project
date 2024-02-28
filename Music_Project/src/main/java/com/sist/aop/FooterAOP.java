@@ -26,10 +26,12 @@ public class FooterAOP {
 	
 	@After("execution(* com.sist.web.*Controller.*(..))")
 	public void footer_data() {
-		List<FindVO> findList=fManager.footerData("신곡");
+		List<FindVO> findNewSongList=fManager.footerData("신곡 발매");
+		List<FindVO> findArtistList=fManager.footerData("가수");
 		List<CdlpVO> cdlpSalesTopList=cService.cdlpSalesTop6();
 		HttpServletRequest request=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		request.setAttribute("findList", findList);
+		request.setAttribute("findNewSongList", findNewSongList);
+		request.setAttribute("findArtistList", findArtistList);
 		request.setAttribute("cdlpSalesTopList", cdlpSalesTopList);
 	}
 }

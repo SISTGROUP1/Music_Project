@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.CdlpVO;
 
@@ -66,7 +67,7 @@ public interface CdlpMapper {
 	// CD/LP 카테고리별 상품 목록 총페이지
 	public int cdlpListTotalPage(CdlpVO vo);
 	// CD/LP 상세보기
-	@Select("SELECT no,poster,subject,artist,publisher,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,price,saleprice,discount,genre,sub_genre,content,image,inventory "
+	@Select("SELECT no,poster,subject,artist,publisher,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,price,saleprice,discount,genre,sub_genre,content,image,inventory,score "
 			+ "FROM cdlp "
 			+ "WHERE no=#{no}")
 	public CdlpVO cdlpDetailData(int no);
@@ -79,4 +80,14 @@ public interface CdlpMapper {
 			+ "ORDER BY inventory DESC) "
 			+ "WHERE rownum<=6")
 	public List<CdlpVO> cdlpSalesTop6();
+	// Score 조회
+	@Select("SELECT ((SELECT SUM(score) FROM All_reply "
+			+ "WHERE typeno=1 AND fno=#{fno})/(SELECT COUNT(*) FROM All_reply "
+			+ "WHERE typeno=1 AND fno=#{fno})) as score FROM dual")
+	public double cdlpScore(int fno);
+	// Score 변경
+	@Update("UPDATE cdlp SET "
+			+ "score=${score} "
+			+ "WHERE no=#{no}")
+	public void cdlpScoreUpdate(@Param("score") double score,@Param("no") int no);
 }

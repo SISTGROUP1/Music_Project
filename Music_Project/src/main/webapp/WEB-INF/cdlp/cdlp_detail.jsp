@@ -52,6 +52,17 @@
 								<h5 class="text-primary mb-3" style="font-size: 1.4rem;">{{cdlp_detail.subject}}</h5>
 								<p>{{cdlp_detail.artist}} 노래 | {{cdlp_detail.publisher}} | {{cdlp_detail.dbday}}</p>
 								<p v-if="cdlp_detail.score===0">첫번째 리뷰어가 되어주세요.</p>	
+								<p v-if="cdlp_detail.score>0">
+									<div v-for="index in 5" style="float: left;">
+										<span v-if="index>=(cdlp_detail.score/2)+1">
+											<img src="../resources/img/star_zero.png" class="star" style="cursor: pointer;">
+										</span>
+										<span v-if="index<(cdlp_detail.score/2)+1">
+											<img src="../resources/img/star_one.png" class="star" style="cursor: pointer;">
+										</span>
+									</div>
+									<span style="font-size: 20px;font-weight: bold;margin-left: 5px;">{{cdlp_detail.score}}</span>
+								</p>
 								<hr>					
 							</div>
 							<div class="mb-4">
@@ -208,23 +219,26 @@
 			}
 		},
 		mounted(){
-			axios.get('../cdlp/detail_vue.do',{
-				params:{
-					no:this.no
-				}
-			}).then(response=>{
-				console.log(response.data)
-				this.cdlp_detail=response.data.cdlp_detail
-				this.cdlp_detail_price=response.data.cdlp_detail.price
-				this.cdlp_detail_saleprice=response.data.cdlp_detail.saleprice
-				this.cdlp_content=response.data.cdlp_detail.content
-				this.cdlp_images=response.data.cdlp_detail.image.split(',')
-				this.sessionId=response.data.sessionId
-			})
-			this.replyList()
-			this.cdlp_amount=this.$refs.amount.value
+			this.dataRecv()
 		},
 		methods:{
+			dataRecv(){
+				axios.get('../cdlp/detail_vue.do',{
+					params:{
+						no:this.no
+					}
+				}).then(response=>{
+					console.log(response.data)
+					this.cdlp_detail=response.data.cdlp_detail
+					this.cdlp_detail_price=response.data.cdlp_detail.price
+					this.cdlp_detail_saleprice=response.data.cdlp_detail.saleprice
+					this.cdlp_content=response.data.cdlp_detail.content
+					this.cdlp_images=response.data.cdlp_detail.image.split(',')
+					this.sessionId=response.data.sessionId
+				})
+				this.replyList()
+				this.cdlp_amount=this.$refs.amount.value
+			},
 			amountDecrease(){
 				let amount=this.$refs.amount.value
 				if(amount==='1'){
@@ -274,6 +288,7 @@
 						this.replyList()
 						this.msg=''
 						this.score=0
+						this.dataRecv()
 					})
 				}
 			},
@@ -324,6 +339,7 @@
 						}
 					}).then(response=>{
 						this.replyList()
+						this.dataRecv()
 					})
 				}else{
 					return

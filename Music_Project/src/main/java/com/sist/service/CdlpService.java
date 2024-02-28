@@ -12,4 +12,6 @@ public interface CdlpService {
 	public int cdlpListTotalPage(CdlpVO vo);
 	public CdlpVO cdlpDetailData(int no);
 	public List<CdlpVO> cdlpSalesTop6();
+	public double cdlpScore(int fno);
+	public void cdlpScoreUpdate(double score, int no);
 }

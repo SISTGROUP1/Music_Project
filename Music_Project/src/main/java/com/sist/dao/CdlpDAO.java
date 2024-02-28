@@ -32,4 +32,10 @@ public class CdlpDAO {
 	public List<CdlpVO> cdlpSalesTop6() {
 		return mapper.cdlpSalesTop6();
 	}
+	public double cdlpScore(int fno) {
+		return mapper.cdlpScore(fno);
+	}
+	public void cdlpScoreUpdate(double score, int no) {
+		mapper.cdlpScoreUpdate(score, no);
+	}
 }
