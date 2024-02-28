@@ -242,7 +242,12 @@
 		},
 		methods:{
 			dataSearch(){
-				location.href='../main/search.do?type='+this.$refs.type.value+'&search='+this.search
+				if(search===null || search===''){
+					this.$refs.search.focus()
+					return
+				}else{
+					location.href='../main/search.do?type='+this.$refs.type.value+'&search='+this.search	
+				}
 			}
 		}
 	}).mount('#dataSearchForm')
