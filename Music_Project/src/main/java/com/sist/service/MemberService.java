@@ -1,5 +1,7 @@
 package com.sist.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.sist.vo.MemberVO;
@@ -15,4 +17,10 @@ public interface MemberService {
 	
 	public String idFindOpen(String userName, String email);
 	public MemberVO pwdChange(String userId, String email, String userPwd);
+	
+	public String userInfoUpdate(MemberVO vo);
+	
+	public String userInfoDelete(String userId);
+	
+	public List<MemberVO> userListData();
 }

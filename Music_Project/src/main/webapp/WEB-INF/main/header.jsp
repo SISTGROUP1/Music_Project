@@ -38,11 +38,9 @@ a#showmain:hover{
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="../resources/views/index.html" class="nav-item nav-link active">Home</a>
-                        <a href="../resources/views/about.html" class="nav-item nav-link">About</a>
+                  
                         
-                        <!-- 게시판 header -->
-                        <a href="../musicboard/notice.do" class="nav-item nav-link">게시판</a>
+                       
                         
                         <!-- 음악게시판 -->
                         <div class="nav-item dropdown">
@@ -73,11 +71,14 @@ a#showmain:hover{
                         	<a href="../chat/chat.do" class="nav-item nav-link">실시간 채팅</a>
                         </sec:authorize>
                         
+                         <!-- 게시판 header -->
+                        <a href="../musicboard/notice.do" class="nav-item nav-link">게시판</a>
+                        
                         <sec:authorize access="hasRole('ROLE_USER')">        
 	                    	<a href="../mypage/main.do" class="nav-item nav-link">마이페이지</a>   
 	                    </sec:authorize>
 	                    <sec:authorize access="hasRole('ROLE_ADMIN')">
-		                    <a href="../admin/main.do" class="nav-item nav-link">관리자페이지</a>
+		                    <a href="../adminpage/userlist.do" class="nav-item nav-link">관리자페이지</a>
 	                    </sec:authorize>
                     </div>
                     
@@ -90,20 +91,6 @@ a#showmain:hover{
                 	
                 	
                 </div>
-                
-                <c:if test="${sessionScope.userId==null }">
-			      	
-				</c:if>
-				<c:if test="${sessionScope.userId!=null }">
-				    <div class="fl_right">
-				      	&nbsp;&nbsp;
-				        ${sessionScope.userName }(
-				        <sec:authorize access="hasRole('ROLE_ADMIN')">관리자</sec:authorize>
-				        <sec:authorize access="hasRole('ROLE_USER')">일반사용자</sec:authorize>
-				        )님 환영합니다.
-				      
-				    </div>
-			    </c:if>
 				 
             </nav>
         </div>

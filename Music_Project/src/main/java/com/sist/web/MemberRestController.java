@@ -48,4 +48,54 @@ public class MemberRestController {
 	    return json;
 	}
 	
+	// 마이페이지
+	@GetMapping(value="mypage/main_vue.do",produces = "text/plain;charset=UTF-8")
+	public String mypage_main(HttpSession session) throws Exception
+	{
+		String userId=(String)session.getAttribute("userId");
+		
+		MemberVO vo=mService.memberSessionData(userId);
+		ObjectMapper mapper=new ObjectMapper();
+	    String json=mapper.writeValueAsString(vo);
+	    return json;
+	}
+	
+	// 마이페이지 정보 수정
+	@GetMapping(value="mypage/update_vue.do",produces = "text/plain;charset=UTF-8")
+	public String mypage_update(String userId) throws Exception
+	{
+		MemberVO vo=mService.memberSessionData(userId);
+		ObjectMapper mapper=new ObjectMapper();
+	    String json=mapper.writeValueAsString(vo);
+	    return json;
+	}
+	@PostMapping(value="mypage/update_ok_vue.do",produces = "text/plain;charset=UTF-8")
+	public String mypage_update_ok(MemberVO vo)
+	{
+		String result=mService.userInfoUpdate(vo);
+		return result;
+	}
+	
+	@GetMapping(value="adminpage/userlist_vue.do",produces = "text/plain;charset=UTF-8")
+	public String adminpage_userlist() throws Exception
+	{
+		List<MemberVO> list=mService.userListData();
+		
+		//JSON변경
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		return json;
+	}
+	
+	// 회원 탈퇴
+	/*@GetMapping(value="mypage/delete_vue.do",produces = "text/plain;charset=UTF-8")
+	public String mypage_delete(HttpSession session)
+	{
+		String userId=(String)session.getAttribute("userId");
+		MemberVO vo=mService.userInfoDelete(userId);
+		ObjectMapper mapper=new ObjectMapper();
+	    String json=mapper.writeValueAsString(vo);
+	    return json;
+	}*/
+	
 }

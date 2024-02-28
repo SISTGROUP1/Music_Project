@@ -2,6 +2,7 @@ package com.sist.mapper;
 import com.sist.vo.*;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -56,6 +57,24 @@ public interface MemberMapper {
 	@Select("UPDATE musicUserInfo SET userPwd=#{userPwd} "
 			+"WHERE userId=#{userId} AND email=#{email}")
 	public MemberVO pwdChange(@Param("userId") String userId, @Param("email") String email, @Param("userPwd") String userPwd);
+	
+	// 마이페이지 수정
+	@Update("UPDATE musicUserInfo SET "
+			+"userName=#{userName}, birth=#{birth}, email=#{email}, addr1=#{addr1}, addr2=#{addr2} "
+			+"WHERE userId=#{userId}")
+	public void userInfoUpdate(MemberVO vo);
+	
+	// 회원 탈퇴
+	@Delete("DELETE FROM musicUserInfo "
+			+"WHERE userId=#{userId}")
+	public String userInfoDelete(String userId);
+	
+	// 관리자 회원리스트 출력
+	@Select("SELECT mu.userId, userName, gender, email "
+			+"FROM musicUserInfo mu, musicAuthority ma "
+			+"WHERE mu.userId=ma.userId "
+			+"AND ma.authority='ROLE_USER'")
+	public List<MemberVO> userListData();
 }
 
 

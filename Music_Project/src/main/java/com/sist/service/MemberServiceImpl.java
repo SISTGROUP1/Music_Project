@@ -61,7 +61,23 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.memberSessionData(userId);
 	}
 
-	
+	@Override
+	public String userInfoUpdate(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mDao.userInfoUpdate(vo);
+	}
+
+	@Override
+	public String userInfoDelete(String userId) {
+		// TODO Auto-generated method stub
+		return mDao.userInfoDelete(userId);
+	}
+
+	@Override
+	public List<MemberVO> userListData() {
+		// TODO Auto-generated method stub
+		return mDao.userListData();
+	}
 
 	
 }

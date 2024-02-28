@@ -1,5 +1,7 @@
 package com.sist.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -83,5 +85,23 @@ public class MemberDAO {
 	{
 		return mapper.pwdChange(userId, email, userPwd);
 	}
+	// 마이페이지 정보 수정
+	public String userInfoUpdate(MemberVO vo)
+	{
+		String result="yes";
+		mapper.userInfoUpdate(vo);
+		return result;
+	}
 	
+	// 회원 탈퇴
+	public String userInfoDelete(String userId)
+	{
+		return mapper.userInfoDelete(userId);
+	}
+	
+	// 관리자 유저리스트
+	public List<MemberVO> userListData()
+	{
+		return mapper.userListData();
+	}
 }
