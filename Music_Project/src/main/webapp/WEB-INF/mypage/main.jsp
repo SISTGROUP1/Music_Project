@@ -54,6 +54,8 @@ a.alink:hover{
 		 	<a href="../mypage/main.do"><input type=button value="내정보" class="cate1"></a>
 		 	<a href="../mypage/mywrite.do"><input type=button value="내가 쓴 글" class="cate2"></a>
 		 	<a href="../mypage/showreserve.do"><input type=button value="예매 내역" class="cate2"></a>
+		 	<a href="../cart/cart.do"><input type=button value="장바구니" class="cate2"></a>
+		 	<a href="../mypage/payment.do"><input type=button value="구매내역" class="cate2"></a>
 		 </div>
 		 <div class="row" id="musicboardrow" style="justify-content: center">
 		  <!-- template -->

@@ -27,4 +27,9 @@ public class MyPageController {
 	{
 		return "adminpage/userlist";
 	}
+	
+	@GetMapping("mypage/payment.do")
+	public String mypage_payment() {
+		return "mypage/mypage_payment";
+	}
 }

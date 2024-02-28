@@ -3,11 +3,13 @@ package com.sist.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.CartMapper;
 import com.sist.vo.CartVO;
+import com.sist.vo.OrderVO;
 
 @Repository
 public class CartDAO {
@@ -37,5 +39,11 @@ public class CartDAO {
 	}
 	public void orderInsert(Map map) {
 		mapper.orderInsert(map);
+	}
+	public List<OrderVO> orderListData(String userId) {
+		return mapper.orderListData(userId);
+	}
+	public int orderTotalCnt(String userId) {
+		return mapper.orderTotalCnt(userId);
 	}
 }

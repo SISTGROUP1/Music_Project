@@ -6,11 +6,14 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.CartVO;
+import com.sist.vo.OrderVO;
 
 public interface CartMapper {
 	/*
@@ -56,5 +59,18 @@ public interface CartMapper {
 	@Insert("INSERT INTO music_order(no,clno,userId,amount,price,regdate) "
 			+ "VALUES(mo_no_seq.nextval,#{clno},#{userId},#{amount},#{price},SYSDATE)")
 	public void orderInsert(Map map);
-	// Cart delete
+	@Results({
+			@Result(column = "subject",property = "cvo.subject"),
+			@Result(column = "poster",property = "cvo.poster")
+	})
+	@Select("SELECT subject,poster,amount,music_order.price,TO_CHAR(music_order.regdate,'YYYY-MM-DD') as dbday "
+			+ "FROM music_order JOIN cdlp "
+			+ "ON music_order.clno=cdlp.no "
+			+ "WHERE userId=#{userId} "
+			+ "ORDER BY music_order.regdate DESC")
+	public List<OrderVO> orderListData(String userId);
+	@Select("SELECT CEIL(COUNT(*)/10) "
+			+ "FROM music_order "
+			+ "WHERE userId=#{userId}")
+	public int orderTotalCnt(String userId);
 }

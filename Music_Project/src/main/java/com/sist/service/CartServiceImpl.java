@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sist.dao.CartDAO;
 import com.sist.vo.CartVO;
+import com.sist.vo.OrderVO;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -52,6 +53,16 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public void orderInsert(Map map) {
 		cDao.orderInsert(map);
+	}
+
+	@Override
+	public List<OrderVO> orderListData(String userId) {
+		return cDao.orderListData(userId);
+	}
+
+	@Override
+	public int orderTotalCnt(String userId) {
+		return cDao.orderTotalCnt(userId);
 	}
 
 }

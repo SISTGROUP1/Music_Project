@@ -20,7 +20,6 @@
 		 text-align: center;
 	}
 	.paymentBtns{
-		display: block;
 		width: 90px;
 		height: 30px;
 		border-radius: 5px;
@@ -42,6 +41,22 @@
 		height: 30px;
 		background-color: transparent;
 	}
+	.cate1, .cate2, .cate3{
+		margin: 2%;
+		border:1px solid #00B98E;    
+		border-radius: 20px;
+		background-Color: white;   
+		font-weight:bold;   
+		color:#00B98E;    
+	}
+	.cate1:hover, .cate2:hover, .cate3:hover{
+		margin: 2%;
+		border:1px solid #00B98E;    
+		border-radius: 20px;
+		background-Color: #00B98E;   
+		font-weight:bold;   
+		color: white;    
+	}
 </style>
 </head>
 <body>
@@ -53,6 +68,13 @@
 				
 				</div>
 				<div class="col-lg-10 wow fadeIn">
+					<div class="cate text-center">
+					 	<a href="../mypage/main.do"><input type=button value="내정보" class="cate1"></a>
+					 	<a href="../mypage/mywrite.do"><input type=button value="내가 쓴 글" class="cate2"></a>
+					 	<a href="../mypage/showreserve.do"><input type=button value="예매 내역" class="cate2"></a>
+					 	<a href="../cart/cart.do"><input type=button value="장바구니" class="cate2"></a>
+					 	<a href="../mypage/payment.do"><input type=button value="구매내역" class="cate2"></a>
+					</div>
 					<div id="cdlpCartApp">
 						<h5 class="text-primary mb-3">장바구니</h5>
 						<hr style="background: #009472;height: 2px;border: 0;">
@@ -90,7 +112,7 @@
 									<p>{{(vo.cvo.saleprice*vo.amount).toLocaleString()}}원</p>
 								</td>
 								<td style="padding: 0px 7.5px;">
-									<input type="button" value="주문하기" class="paymentBtns buyBtn">
+									<input type="button" value="주문하기" class="paymentBtns buyBtn" @click="buyNow()">
 									<input type="button" value="삭제" class="paymentBtns delBtn" @click="del(vo.no)">
 								</td>
 							</tr>
@@ -101,8 +123,8 @@
 							</tr>
 							<tr>
 								<td colspan="6" style="text-align: center;padding: 10px;">
-									<input type="button" value="주문하기" @click="buyNow()">
-									<input type="button" value="메인화면으로">
+									<input type="button" value="주문하기" class="paymentBtns buyBtn paymentBtn" @click="buyNow()">
+									<input type="button" value="메인화면으로" class="paymentBtns buyBtn paymentBtn" style="margin-left: 10px;border-color: #ebebeb;background-color: white;color: #333;">
 								</td>
 							</tr>
 						</table>
@@ -194,6 +216,7 @@
 				}
 			},
 			buyNow(){
+				console.log('asd')
 				if(this.checked.length===0){
 					alert('주문할 상품을 선택하여 주세요. ')
 				}else{

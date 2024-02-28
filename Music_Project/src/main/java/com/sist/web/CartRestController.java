@@ -76,7 +76,6 @@ public class CartRestController {
 	}
 	@GetMapping(value = "cart/payment_list.do",produces = "text/plain;charset=UTF-8")
 	public String cart_payment_list(String checked,String type,HttpSession session) throws Exception {
-		System.out.println("카트에서 구매할 상품 : "+checked);
 		String userId=(String) session.getAttribute("userId");
 		List<CartVO> list=new ArrayList<CartVO>();
 		if(checked.contains(",")) {
@@ -91,7 +90,6 @@ public class CartRestController {
 				}else {
 					map.put("type", 1);
 				}
-//				CartVO vo=cService.cartData_payment(userId, no);
 				CartVO vo=cService.cartData_payment(map);
 				list.add(vo);
 			}
@@ -104,7 +102,6 @@ public class CartRestController {
 			}else {
 				map.put("type", 1);
 			}
-//			list.add(cService.cartData_payment(userId,Integer.parseInt(checked)));
 			list.add(cService.cartData_payment(map));
 		}
 		ObjectMapper mapper=new ObjectMapper();
