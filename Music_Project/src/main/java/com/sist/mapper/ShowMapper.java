@@ -13,6 +13,20 @@ import lombok.experimental.PackagePrivate;
 
 public interface ShowMapper {
 
+	// 공연 검색
+	@Select("SELECT sno,sposter,stitle,sdate,num "
+			+"FROM (SELECT sno,sposter,stitle,sdate,rownum as num "
+			+"FROM (SELECT sno,sposter,stitle,sdate "
+			+"FROM showInfo "
+			+"WHERE stitle LIKE '%'||#{search}||'%')) "
+			+"WHERE num BETWEEN #{start} AND #{end}")
+	public List<ShowVO> showsearch(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/8) FROM showInfo "
+			+"WHERE stitle LIKE '%'||#{search}||'%'")
+	public int showsearchcount(String search);
+	
+	
 	// 공연 메인 페이지
 	@Select("SELECT sno,sposter,stitle,num,scate,sdate "
 			+"FROM (SELECT sno,sposter,stitle,scate,sdate,rownum as num "

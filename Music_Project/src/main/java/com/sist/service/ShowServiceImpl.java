@@ -54,5 +54,17 @@ public class ShowServiceImpl implements ShowService {
 		return dao.showDetailData(sno);
 	}
 
+	@Override
+	public List<ShowVO> showsearch(Map map) {
+		// TODO Auto-generated method stub
+		return dao.showsearch(map);
+	}
+
+	@Override
+	public int showsearchcount(String search) {
+		// TODO Auto-generated method stub
+		return dao.showsearchcount(search);
+	}
+
 	// 후기
 }

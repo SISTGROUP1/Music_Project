@@ -22,6 +22,17 @@ public class ShowDAO {
 		return mapper.Topshow();
 	}
 	
+	//서치
+	public List<ShowVO> showsearch(Map map)
+	{
+		return mapper.showsearch(map);
+	}
+	
+	public int showsearchcount(String search)
+	{
+		return mapper.showsearchcount(search);
+	}
+	
 	// 공연 메인 페이지
 	// 콘서트 리스트
 	public List<ShowVO> showconListData()
@@ -56,4 +67,5 @@ public class ShowDAO {
 	}
 	
 	// 후기
+	
 }

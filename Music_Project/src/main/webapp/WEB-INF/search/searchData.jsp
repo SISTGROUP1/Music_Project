@@ -74,13 +74,13 @@
                         </a>
                     </div>
                     <div v-if="type===2" v-for="vo in tag_data" class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" :href="'../show/detail.do?sno='+vo.sno">
                             <div class="rounded p-4">        
                                 <div class="icon mb-3">
-                                    <img class="img-fluid" :src="vo.image" alt="Icon">
+                                    <img class="img-fluid" :src="vo.sposter" alt="Icon">
                                 </div>
-                                <h6>{{vo.song}}</h6>
-                                <span>{{vo.artist}}</span>
+                                <h6>{{vo.stitle}}</h6>
+                                <span>{{vo.sdate}}</span>
                             </div>
                         </a>
                     </div>

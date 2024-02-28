@@ -104,14 +104,14 @@ td.link:hover,tr.tr_link:hover{
     
     <td width="10%" style="font-weight:700;">R</td>
     <h2 class="text-center" style="padding-left: 34%" v-show="seatShow">좌석</h2>
-    <td width=90% style="border-bottom-width:0px;" rowspan="3" @click="seatSelect(c)">
+    <td width=90% style="border-bottom-width:0px;" rowspan="3">
         <br/>
         <% for(int i=1;i<=6;i++) { %>
             <small>
               <%=i%2==0?"2":"1" %>
             </small>
             <% for(int c=1;c<=10;c++){ %>
-               <input style="margin-right: 10px;margin-bottom: 10px" type="checkbox" id="showSeat" name="seat" value="<%=c %>-<%=i %>">
+               <input style="margin-right: 10px;margin-bottom: 10px" type="checkbox" id="showSeat" name="seat" value="<%=c %>-<%=i %>" @click="seatSelect(<%=c%>)">
         <% } %>
         <br/>
         <%= i%2==0?"<br/>":"" %>
@@ -157,7 +157,7 @@ let reserveApp=Vue.createApp({
 		      sShow:false,
 		      seatShow:false,
 		      okShow:false,
-		      c:1
+		      c:0
 		  }
 	  },
 	  mounted(){
@@ -181,6 +181,7 @@ let reserveApp=Vue.createApp({
 						 rSeat:this.c
 					 }
 				 }).then(response=>{
+					 console.log(response.data)
 					 if(response.data==='yes')
 				     {
 						 location.href="../mypage/showreserve.do" 
@@ -199,8 +200,9 @@ let reserveApp=Vue.createApp({
 				 this.seatShow=true;
 			   },
 		  seatSelect(c){
-				 this.c=c;
-				 this.okShow=true;
+				this.c=c;
+				console.log(c);
+				this.okShow=true;
 			   },
 		  init(){
 		        this.currentMonthStartWeekIndex = this.getStartWeek(this.currentYear, this.currentMonth);
