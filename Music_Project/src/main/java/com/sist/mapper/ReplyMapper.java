@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
 import com.sist.vo.ReplyVO;
 
 public interface ReplyMapper {
@@ -25,6 +24,7 @@ public interface ReplyMapper {
 			+ "FROM All_reply "
 			+ "WHERE typeno=#{typeno} AND fno=#{fno}")
 	public int replyTotalCnt(@Param("typeno") int typeno,@Param("fno") int fno);
+	
 	// 댓글 추가
 	@Insert("INSERT INTO All_reply "
 			+ "VALUES(ar_no_seq.nextval,#{userId},#{userName},#{typeno},#{fno},#{score},#{msg},SYSDATE)")
@@ -38,4 +38,21 @@ public interface ReplyMapper {
 	@Delete("DELETE FROM All_reply "
 			+ "WHERE typeno=#{typeno} AND no=#{no}")
 	public void replyDelete(ReplyVO vo);
+	
+	
+	// 공연 댓글
+	  @Select("SELECT no,typeno,fno,userId,userName,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday "
+			 +"FROM all_reply "
+			 +"WHERE fno=#{fno} "
+			 +"ORDER BY no DESC")
+	  public List<ReplyVO> showreplyListData(int sno);
+	  
+	  @Select("SELECT COUNT(*) FROM all_reply "
+			  +"WHERE typeno=5 AND fno=#{fno}")
+	  public int countshowreview(int sno);
+	  
+	  // 추가 
+	  @Insert("INSERT INTO all_reply(no,typeno,fno,userId,userName,msg) "
+			 +"VALUES(prr_no_seq.nextval,#{typeno},#{fno},#{userId},#{userName},#{msg})")
+	  public void showreplyInsert(ReplyVO vo);
 }

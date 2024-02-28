@@ -25,6 +25,9 @@ public class MainController {
 	@Autowired
 	private CdlpService cService;
 	
+	@Autowired
+	private ShowService sService;
+	
 	@GetMapping("main/main.do")
 	public String main_main(Model model, Principal p, HttpSession session)
 	{
@@ -52,6 +55,9 @@ public class MainController {
 		model.addAttribute("mfList",mfList);
 		model.addAttribute("newMusicList",newMusicList);
 		
+		// 홈 공연 top1
+		List<ShowVO> Topshow=sService.Topshow();
+		model.addAttribute("Topshow",Topshow);
 		return "main";
 	}
 }

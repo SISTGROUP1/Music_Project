@@ -8,8 +8,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#showmain').click(function(){
+		window.location.href = "../show/main.do";
+	})
+})
+</script>
 <style type="text/css">
 a#notice:hover{
+	cursor: pointer;
+}
+a#showmain:hover{
 	cursor: pointer;
 }
 </style>
@@ -45,13 +55,17 @@ a#notice:hover{
                         </div>
                         <!-- 끝 -->
                         
+                        <!-- 공연게시판 -->
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="../resources/views/testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="../resources/views/404.html" class="dropdown-item">404 Error</a>
-                            </div>
+                           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="showmain">공연</a>
+                           <div class="dropdown-menu rounded-0 m-0">
+                               <a href="../show/list.do" class="dropdown-item">콘서트</a>
+                               <a href="../show/musical.do" class="dropdown-item">뮤지컬</a>
+                               <a href="../show/classic.do" class="dropdown-item">클래식</a>
+                           </div>
                         </div>
+                        <!-- 공연까지 -->
+                        
                         <a href="../cdlp/list.do?genre=OST" class="nav-item nav-link">CD/LP</a>
                         <a href="../musicnews/list.do" class="nav-item nav-link">매거진</a>
                         

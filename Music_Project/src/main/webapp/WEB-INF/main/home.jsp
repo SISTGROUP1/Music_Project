@@ -166,19 +166,22 @@
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5 align-items-center">
+                <c:forEach var="showvo" items="${ Topshow}">
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                            <img class="img-fluid w-100" src="../resources/img/about.jpg">
+                            <img class="img-fluid w-100" src="${showvo.sposter }" style="height:560px;width: 480px !important">
+                            </img>
                         </div>
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                        <h1 class="mb-4">#1 Place To Find The Perfect Property</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
-                        <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+                        <h1 class="mb-4" style="font-size: 2rem">${showvo.stitle }</h1>
+                        <p><i class="fa fa-check text-primary me-3">&nbsp;${showvo.sdate }</i></p>
+                        <p><i class="fa fa-check text-primary me-3">&nbsp;${showvo.sloc }</i></p>
+                        <p><i class="fa fa-check text-primary me-3">&nbsp;R석 : 70,000원</i></p>
+                        <a class="btn btn-primary py-3 px-5 mt-3" href="../show/detail.do?sno=${ showvo.sno}" style="width: 201.933px;margin-left: 30%;">예매하기</a>
+                        <a class="btn btn-primary py-3 px-5 mt-3" href="../show/main.do">공연 전체 보기</a>
                     </div>
+                  </c:forEach>
                 </div>
             </div>
         </div>
