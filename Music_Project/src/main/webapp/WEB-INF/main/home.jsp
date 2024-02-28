@@ -242,7 +242,7 @@
 		},
 		methods:{
 			dataSearch(){
-				if(search===null || search===''){
+				if(this.search===null || this.search===''){
 					this.$refs.search.focus()
 					return
 				}else{
