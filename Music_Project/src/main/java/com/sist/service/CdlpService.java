@@ -14,4 +14,6 @@ public interface CdlpService {
 	public List<CdlpVO> cdlpSalesTop6();
 	public double cdlpScore(int fno);
 	public void cdlpScoreUpdate(double score, int no);
+	public List<CdlpVO> searchCdlpData(Map map);
+	public int searchCdlpDataCnt(String search);
 }

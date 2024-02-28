@@ -60,4 +60,10 @@ public class MainController {
 		model.addAttribute("Topshow",Topshow);
 		return "main";
 	}
+	@GetMapping("main/search.do")
+	public String main_search(int type,String search,Model model) {
+		model.addAttribute("type", type);
+		model.addAttribute("search", search);
+		return "search/searchData";
+	}
 }

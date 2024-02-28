@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <div class="container-xxl bg-white p-0">
@@ -77,34 +79,25 @@
         </div>
         <!-- Header End -->
 <!-- Search Start -->
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+         <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;" id="dataSearchForm">
             <div class="container">
                 <div class="row g-2">
                     <div class="col-md-10">
                         <div class="row g-2">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Property Type</option>
-                                    <option value="1">Property Type 1</option>
-                                    <option value="2">Property Type 2</option>
-                                    <option value="3">Property Type 3</option>
+                        	<div class="col-md-3">
+                                <select class="form-select border-0 py-3" ref="type">
+                                    <option value="0" selected>가수</option>
+                                    <option value="1">CD/LP</option>
+                                    <option value="2">공연</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Location</option>
-                                    <option value="1">Location 1</option>
-                                    <option value="2">Location 2</option>
-                                    <option value="3">Location 3</option>
-                                </select>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword" ref="search" v-model="search">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-dark border-0 w-100 py-3">Search</button>
+                        <button class="btn btn-dark border-0 w-100 py-3" @click="dataSearch()">Search</button>
                     </div>
                 </div>
             </div>
@@ -147,7 +140,7 @@
                 	<!-- 한 줄에 4개씩 출력 -->
                 	<c:forEach var="vo" items="${cdlpList }">
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item d-block bg-light text-center p-3" href="">
+                        <a class="cat-item d-block bg-light text-center p-3" href="../cdlp/detail.do?no=${vo.no }">
                             <div class="icon mb-3" style="border-radius: 0;">
                                 <img src="${vo.poster }" style="width: 100%">
                             </div>
@@ -239,5 +232,20 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 </div>
+<script>
+	let dataSearchForm=Vue.createApp({
+		data(){
+			return{
+				type:0,
+				search:''
+			}
+		},
+		methods:{
+			dataSearch(){
+				location.href='../main/search.do?type='+this.$refs.type.value+'&search='+this.search
+			}
+		}
+	}).mount('#dataSearchForm')
+</script>
 </body>
 </html>

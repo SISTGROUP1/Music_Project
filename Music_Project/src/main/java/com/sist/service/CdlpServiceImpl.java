@@ -54,4 +54,14 @@ public class CdlpServiceImpl implements CdlpService {
 		cDao.cdlpScoreUpdate(score, no);
 	}
 
+	@Override
+	public List<CdlpVO> searchCdlpData(Map map) {
+		return cDao.searchCdlpData(map);
+	}
+
+	@Override
+	public int searchCdlpDataCnt(String search) {
+		return cDao.searchCdlpDataCnt(search);
+	}
+
 }

@@ -90,4 +90,14 @@ public interface CdlpMapper {
 			+ "score=${score} "
 			+ "WHERE no=#{no}")
 	public void cdlpScoreUpdate(@Param("score") double score,@Param("no") int no);
+	@Select("SELECT no,poster,subject,saleprice,num "
+			+ "FROM (SELECT no,poster,subject,saleprice,rownum as num "
+			+ "FROM (SELECT no,poster,subject,saleprice "
+			+ "FROM cdlp WHERE subject LIKE '%'||#{search}||'%')) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<CdlpVO> searchCdlpData(Map map);
+	@Select("SELECT CEIL(COUNT(*)/8) "
+			+ "FROM cdlp "
+			+ "WHERE subject LIKE '%'||#{search}||'%'")
+	public int searchCdlpDataCnt(String search);
 }

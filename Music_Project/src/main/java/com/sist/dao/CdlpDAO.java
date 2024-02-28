@@ -38,4 +38,10 @@ public class CdlpDAO {
 	public void cdlpScoreUpdate(double score, int no) {
 		mapper.cdlpScoreUpdate(score, no);
 	}
+	public List<CdlpVO> searchCdlpData(Map map) {
+		return mapper.searchCdlpData(map);
+	}
+	public int searchCdlpDataCnt(String search) {
+		return mapper.searchCdlpDataCnt(search);
+	}
 }

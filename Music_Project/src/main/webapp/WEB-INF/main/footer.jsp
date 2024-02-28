@@ -28,9 +28,13 @@
                         <h5 class="text-white mb-4">CD/LP 베스트셀러</h5>
                         <div class="row g-2 pt-2">
                         	<c:forEach var="vo" items="${cdlpSalesTopList }">
+                        		
 	                            <div class="col-4">
+	                            	<a href="../cdlp/detail.do?no=${vo.no }">
 	                                <img class="img-fluid rounded bg-light p-1" src="${vo.poster }" alt="">
+	                                </a>
 	                            </div>
+	                            
                             </c:forEach>
                         </div>
                     </div>
