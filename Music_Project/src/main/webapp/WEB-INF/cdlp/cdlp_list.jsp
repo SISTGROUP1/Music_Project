@@ -318,6 +318,21 @@
 			},
 			buyNow(no){
 				if(this.isLogin()){
+					this.checked.push(no)
+					for(let i=0;i<this.checked.length;i++){
+						this.check+=this.checked[i]+','
+					}
+					this.check=this.check.substring(0,this.check.lastIndexOf(','))
+					axios.get('../cart/insert.do',{
+						params:{
+							checked:this.check,
+							amount:1,
+							userId:this.sessionId
+						}
+					}).then(response=>{
+						console.log('insert 완료')
+						location.href='../cart/payment.do?check='+this.check
+					})
 					
 				}
 			},

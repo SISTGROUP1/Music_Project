@@ -215,7 +215,9 @@
 				totalpage:0,
 				isShow:true,
 				like_list:[],
-				cdlp_amount:0
+				cdlp_amount:0,
+				checked:[],
+				check:''
 			}
 		},
 		mounted(){
@@ -447,13 +449,22 @@
 			},
 			buyNow(no){
 				if(this.isLogin()){
-					axios.get('../cart/buy.do',{
+					this.checked.push(this.cdlp_detail.no)
+					for(let i=0;i<this.checked.length;i++){
+						this.check+=this.checked[i]+','
+					}
+					this.check=this.check.substring(0,this.check.lastIndexOf(','))
+					axios.get('../cart/insert.do',{
 						params:{
-							nos:no
+							checked:this.check,
+							amount:this.cdlp_amount,
+							userId:this.sessionId
 						}
 					}).then(response=>{
-						
+						console.log('insert 완료')
+						location.href='../cart/payment.do?check='+this.check
 					})
+					
 				}
 			}
 		}
