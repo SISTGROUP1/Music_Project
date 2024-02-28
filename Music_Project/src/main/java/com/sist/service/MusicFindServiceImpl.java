@@ -174,5 +174,17 @@ public class MusicFindServiceImpl implements MusicFindService{
 		// TODO Auto-generated method stub
 		return gmDao.footerMV();
 	}
+
+	@Override
+	public List<MusicFindVO> searchArtist(Map map) {
+		// TODO Auto-generated method stub
+		return gmDao.searchArtist(map);
+	}
+
+	@Override
+	public int searchTotalPage(String search) {
+		// TODO Auto-generated method stub
+		return gmDao.searchTotalPage(search);
+	}
 	
 }

@@ -54,9 +54,9 @@ public interface MusicFindMapper {
 	@Select("SELECT DISTINCT GENRE FROM GMUSICFIND WHERE gtype=#{gtype}")
 	public List<MusicFindVO> gmusicTypeFind(int gtype);
 	
-	@Select("SELECT gtitle,artist,song,image,num "
-			+ "FROM (SELECT gtitle,artist,song,image,rownum as num "
-			+ "FROM (SELECT gtitle,artist,song,image "
+	@Select("SELECT gnum,gtitle,artist,song,image,num "
+			+ "FROM (SELECT gnum,gtitle,artist,song,image,rownum as num "
+			+ "FROM (SELECT gnum,gtitle,artist,song,image "
 			+ "FROM gmusicfind WHERE gnum in(SELECT gnum FROM gmusicdetail "
 			+ "WHERE REGEXP_LIKE(tag,#{tag})) ORDER BY gnum"
 			+ ")) WHERE num BETWEEN #{start} AND #{end}")
@@ -136,4 +136,14 @@ public interface MusicFindMapper {
 	
 	@Select("SELECT gnum,image,num FROM (SELECT gnum,image,rownum AS num FROM GMUSICFIND WHERE mv='뮤비' ORDER BY gnum) WHERE num BETWEEN 1 AND 6")
 	public List<MusicFindVO> footerMV();
+	
+	@Select("SELECT gnum,artist,song,image,num "
+			+ "FROM (SELECT gnum,artist,song,image,rownum as num "
+			+ "FROM (SELECT gnum,artist,song,image "
+			+ "FROM gmusicfind WHERE REGEXP_LIKE(artist,#{search}) ORDER BY gnum)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<MusicFindVO> searchArtist(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/8) FROM gmusicfind WHERE REGEXP_LIKE(artist,#{search})")
+	public int searchTotalPage(String search);
 }

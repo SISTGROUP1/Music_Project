@@ -52,7 +52,7 @@
                 </div>
                 <div class="row g-4">
                     <div v-for="vo in tag_data" class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item d-block bg-light text-center rounded p-3" href="">
+                        <a class="cat-item d-block bg-light text-center rounded p-3" :href="'../musicfind/mvdetail.do?gnum='+vo.gnum">
                             <div class="rounded p-4">        
                                 <div class="icon mb-3">
                                     <img class="img-fluid" :src="vo.image" alt="Icon">

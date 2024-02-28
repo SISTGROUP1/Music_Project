@@ -37,4 +37,6 @@ public interface MusicFindService {
 	public List<MusicFindVO> MyMusicList(String userId);
 	public void MyMusicDelete(int num);
 	public List<MusicFindVO> footerMV();
+	public List<MusicFindVO> searchArtist(Map map);
+	public int searchTotalPage(String search);
 }

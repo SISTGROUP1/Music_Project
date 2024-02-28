@@ -98,4 +98,10 @@ public class MusicFindDAO {
 	public List<MusicFindVO> footerMV(){
 		return mapper.footerMV();
 	}
+	public List<MusicFindVO> searchArtist(Map map){
+		return mapper.searchArtist(map);
+	}
+	public int searchTotalPage(String search) {
+		return mapper.searchTotalPage(search);
+	}
 }

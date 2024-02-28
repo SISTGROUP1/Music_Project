@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.*;
 import com.sist.vo.CdlpVO;
+import com.sist.vo.MusicFindVO;
 import com.sist.vo.ShowVO;
 
 @RestController
@@ -20,6 +21,9 @@ public class MainRestController {
 	
 	@Autowired
 	private ShowService sService;
+	
+	@Autowired
+	private MusicFindService mfService;
 	
 	@GetMapping(value = "search/searchDataFind_vue.do",produces = "text/plain;charset=UTF-8")
 	public String searchDataFind_vue(int page,String type,String search) throws Exception {
@@ -32,15 +36,26 @@ public class MainRestController {
 		map.put("end", end);
 		map.put("search", search);
 		
+		final int BLOCK=10;
+		int startPage=((page-1)/BLOCK*BLOCK)+1;
+		int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+		
 		if(type.equals("0")) {
+			List<MusicFindVO> list = mfService.searchArtist(map);
+			int totalpage = mfService.searchTotalPage(search);
+			
+			if(endPage>totalpage) endPage=totalpage;
+			
+			map.put("list", list);
+			map.put("curpage", page);
+			map.put("startPage", startPage);
+			map.put("endPage", endPage);
+			map.put("totalpage", totalpage);
 			
 		}else if(type.equals("1")) {
 			List<CdlpVO> list=cService.searchCdlpData(map);
 			int totalpage=cService.searchCdlpDataCnt(search);
 			
-			final int BLOCK=10;
-			int startPage=((page-1)/BLOCK*BLOCK)+1;
-			int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
 			if(endPage>totalpage) endPage=totalpage;
 			
 			map.put("list", list);
@@ -54,9 +69,6 @@ public class MainRestController {
 			
 			int totalpage=sService.showsearchcount(search);
 			
-			final int BLOCK=10;
-			int startPage=((page-1)/BLOCK*BLOCK)+1;
-			int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
 			if(endPage>totalpage) endPage=totalpage;
 			
 			map.put("list", list);
