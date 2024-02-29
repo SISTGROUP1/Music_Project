@@ -63,7 +63,7 @@ public interface CartMapper {
 			@Result(column = "subject",property = "cvo.subject"),
 			@Result(column = "poster",property = "cvo.poster")
 	})
-	@Select("SELECT subject,poster,amount,music_order.price,TO_CHAR(music_order.regdate,'YYYY-MM-DD') as dbday "
+	@Select("SELECT cdlp.no,subject,poster,amount,music_order.price,TO_CHAR(music_order.regdate,'YYYY-MM-DD') as dbday "
 			+ "FROM music_order JOIN cdlp "
 			+ "ON music_order.clno=cdlp.no "
 			+ "WHERE userId=#{userId} "

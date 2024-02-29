@@ -87,7 +87,9 @@
 									<img :src="vo.cvo.poster" style="width: 80px;height: 80px;">
 								</td>
 								<td style="padding-right: 10px;text-align: left;">
-									<p>{{vo.cvo.subject}}</p>
+									<p>
+										<a :href="'../cdlp/detail.do?no='+vo.no">{{vo.cvo.subject}}</a>
+									</p>
 								</td>
 								<td>
 									{{vo.amount}}

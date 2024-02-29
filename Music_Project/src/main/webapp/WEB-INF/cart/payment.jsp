@@ -52,7 +52,7 @@
 		       		data: {"nos":String($('#nos').val()),"type":String($('#type').val())},
 		       		success:function(){
 		       			alert('구매 완료')
-		       			location.href='../main/main.do'
+		       			location.href='../mypage/payment.do'
 		       		}
 		       	})
 		    }
