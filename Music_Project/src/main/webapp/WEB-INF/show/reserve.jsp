@@ -127,8 +127,8 @@ td.link:hover,tr.tr_link:hover{
   </tr>
   <tr>
     <td colspan="2" class="text-center" v-show="okShow">
-      <input type=button value="예약" @click="reserveOk()">
-      <input type="button" value="취소" @click="goback()">    
+     <a class="btn btn-primary py-1 px-3 wow " @click="reserveOk()">예매하기</a></div>
+     <a class="btn btn-primary py-1 px-3 wow " style="margin-left:3%" @click="goback()">취소</a></div> 
     </td>
   </tr>
 </table>

@@ -159,7 +159,6 @@ $(function() {
 				  this.addScript()
 			  }
 		  })
-		  this.replyList()
 	  },
 	  methods:{
 		  replyInsert(){
