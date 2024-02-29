@@ -38,5 +38,21 @@ public interface ReplyMapper {
 	@Delete("DELETE FROM All_reply "
 			+ "WHERE typeno=#{typeno} AND no=#{no}")
 	public void replyDelete(ReplyVO vo);
-	  
+	
+	// 공연 댓글
+		// 목록 
+		  @Select("SELECT no,typeno,fno,userId,userName,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday "
+				 +"FROM all_reply "
+				 +"WHERE fno=#{fno} AND typeno=5"
+				 +"ORDER BY no DESC")
+		  public List<ReplyVO> showreplyListData(int sno);
+		  
+		  @Select("SELECT COUNT(*) FROM all_reply "
+				  +"WHERE typeno=5 AND fno=#{fno}")
+		  public int countshowreview(int sno);
+		  
+		  // 추가 
+		  @Insert("INSERT INTO all_reply(no,typeno,fno,userId,userName,msg) "
+				 +"VALUES(ar_no_seq.nextval,#{typeno},#{fno},#{userId},#{userName},#{msg})")
+		  public void showreplyInsert(ReplyVO vo);
 }

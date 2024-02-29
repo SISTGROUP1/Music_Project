@@ -19,7 +19,10 @@ public interface ShowService {
 	public int conTotalPage(int scate);
 	public ShowVO showDetailData(int sno);
 	
-	public List<ShowVO> showsearch(Map map);
+	public List<ReplyVO> showreplyListData(int sno);
+	public int countshowreview(int sno);
+	public void showreplyInsert(ReplyVO vo);
 	
+	public List<ShowVO> showsearch(Map map);
 	public int showsearchcount(String search);
 }

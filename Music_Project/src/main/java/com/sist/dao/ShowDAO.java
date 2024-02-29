@@ -67,5 +67,19 @@ public class ShowDAO {
 	}
 	
 	// 후기
+	public List<ReplyVO> showreplyListData(int sno)
+	{
+		return rMapper.showreplyListData(sno);
+	}
+	
+	public int countshowreview(int sno)
+	{
+		return rMapper.countshowreview(sno);
+	}
+	
+	public void showreplyInsert(ReplyVO vo)
+	{
+		rMapper.showreplyInsert(vo);
+	}
 	
 }

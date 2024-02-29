@@ -72,6 +72,7 @@ $(function() {
 <div style="height: 30px"></div>
       <a style="color:black;font-weight: bold">배송정보</a><br>
       <span id="price2">{{show_detail.sdelivery}}</span>
+      <div style="margin-top: 0px"><a class="btn btn-primary py-1 px-3 mt-1 wow fadeInUp" data-wow-delay="0.1s" style="margin-left: 90%;" onclick="javascript:history.back()">목록</a></div>
     </td>
   </tr>
   </table>
@@ -97,34 +98,22 @@ $(function() {
     </tr>
   </table>
   <div id="map"style="height:500px;width: 920.317px;margin-left: 10.7%" v-show="isShowloc2"></div>
-  <table class="table" v-show="isShowReview" v-for="rvo in reply_list" style="border: 1px solid #00B98E;border-radius:1rem">
+  <table class="table" v-show="isShowReview" v-for="rvo in reply_list" style="border: 1px solid #00B98E;border-radius:1rem;width: 1005px;margin-left: 9px">
     <tr>
           <td class="text-left">♬{{rvo.userName}}({{rvo.dbday}})</td>
-          <td class="text-right">
-           <span class="inline" v-if="rvo.userId===sessionId">
-            <input type=button class="btn-xs btn-danger" value="수정" @click="updateForm(rvo.no)" :id="'up'+rvo.no">&nbsp;
-            <input type=button class="btn-xs btn-info" value="삭제" @click="replyDelete(rvo.no)">
-           </span>
-          </td>
+          
          </tr>
          <tr>
            <td colspan="2" class="text-left" valign="top">
             <pre style="white-space: pre-wrap;background-color: white;border:none">{{rvo.msg}}</pre>
            </td>
          </tr>
-         <tr style="display:none" :id="'u'+rvo.no" class="ups">
-	       <td colspan="2">
-	         <textarea rows="4" cols="85" :id="'u_msg'+rvo.no" style="float: left">{{rvo.msg}}</textarea>
-	         <input type=button value="댓글수정" class="btn-danger"
-	          style="float: left;width: 80px;height: 86px" @click="replyUpdate(rvo.no)">
-	       </td>
-	      </tr>
 	</table>       
 	<table class="table" v-if="sessionId">
     <tr>
       <td>
-      <textarea rows="2" cols="85" ref="msg" style="float: left" v-model="msg"></textarea>
-      <a class="btn btn-primary py-1 px-3" style="float: left;height:50px;padding-top:10px !important" @click="replyInsert()">리뷰쓰기</a>
+      <textarea rows="2" cols="110" ref="msg" style="float: left" v-model="msg"></textarea>
+      <a class="btn btn-primary py-1 px-3" style="float: left;height:50px;margin-left: 1%;padding-top: 10px" @click="replyInsert()">리뷰쓰기</a>
       </td>
 	</tr>
 	</table>
@@ -146,8 +135,7 @@ $(function() {
 	    	  sessionId:'${sessionId}',
 	    	  msg:'',
 	    	  u:0,
-	    	  reply_cnt:0,
-	    	  score:0
+	    	  count:0
 		  }
 	  },
 	  mounted(){
@@ -158,7 +146,10 @@ $(function() {
 		  }).then(response=>{
 			  console.log(response.data)
 			  this.show_detail=response.data.show_detail
+			  this.reply_list=response.data.reply_list
+			  this.count=response.data.count
 			  this.sdeposter=response.data.show_detail.sdeposter.split(",")
+			  console.log(this.count)
 			  if(window.kakao && window.kakao.maps)
 			  {
 				  this.initMap()
@@ -171,71 +162,14 @@ $(function() {
 		  this.replyList()
 	  },
 	  methods:{
-		  replyList(){
-				axios.get('../reply/reply_list.do',{
-					params:{
-						fno:this.sno,
-						typeno:5,
-						page:this.review_page
-					}
-				}).then(response=>{
-					this.reply_list=response.data.reply_list
-					this.reply_cnt=response.data.reply_cnt					
-					console.log(this.reply_list)
-				})
-				
-				axios.get('../reply/reply_page.do',{
-					params:{
-						fno:this.sno,
-						typeno:5,
-						page:this.review_page
-					}
-				}).then(response=>{
-					this.review_page=response.data.curpage
-					this.totalpage=response.data.totalpage
-					this.startPage=response.data.startPage
-					this.endPage=response.data.endPage
-				})
-			},
-	    	 updateForm(no){
-	    		$('.ups').hide();
-	    		$('#up'+no).val('수정')
-	    		if(this.u==0)
-	    		{
-	    		    this.u=1;
-	    		    $('#u'+no).show();
-	    		    $('#up'+no).val('취소')
-	    		    
-	    		}
-	    		else
-	    		{
-	    			this.u=0;
-	    			$('#u'+no).hide();
-	    		    $('#up'+no).val('수정')
-	    		}
-	    	 },
-	    	 
-	    	 replyDelete(no){
-	    		axios.get('../reply/reply_delete.do',{
-	    		  params:
-	    			  {
-	    			      no:no,
-	    			      sno:this.no,
-	    			      typeno:5
-	    			  }
-	    			
-	    		}).then(response=>{
-	    			this.replyList()
-	    		}) 
-	    	 },
-	    	 replyInsert(){
+		  replyInsert(){
 	    		if(this.msg==="")
 	    		{
 	    			this.$refs.msg.focus()
 	    			return
 	    		}
 	    		
-	    		axios.get('../reply/reply_insert.do',{
+	    		axios.post('../show/reply_insert_vue.do',null,{
 	    			params:{
 	    				fno:this.sno,
 	    				msg:this.msg,
@@ -243,7 +177,7 @@ $(function() {
 	    			}
 	    		}).then(response=>{
 	    			console.log(response.data)
-	    			this.replyList()
+	    			this.reply_list=response.data
 	    			this.msg=''
 	    		})
 	    	 },
